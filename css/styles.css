@@ -1,10 +1,10 @@
 /* ============================================
-   CSS VARIABLES (Slate + Emerald Theme - NO BLUE)
+   CSS VARIABLES (Slate + Emerald Theme)
    ============================================ */
 :root {
-  --primary-dark: #0f172a;      /* Deep Slate */
-  --primary-color: #1e293b;     /* Medium Slate */
-  --accent-color: #059669;      /* Emerald Green */
+  --primary-dark: #0f172a;
+  --primary-color: #1e293b;
+  --accent-color: #059669;
   --accent-hover: #047857;
   --accent-light: #ecfdf5;
   --border-color: #e2e8f0;
@@ -39,7 +39,7 @@ a {
   color: var(--accent-color);
 }
 
-/* ===== WIDER CONTAINER (Fixes the "vertical narrow" issue) ===== */
+/* ===== WIDER CONTAINER ===== */
 .container {
   max-width: 1600px;
   margin: 0 auto;
@@ -48,7 +48,7 @@ a {
 }
 
 /* ============================================
-   NAVBAR (Full width, dark slate)
+   NAVBAR
    ============================================ */
 .navbar {
   background: var(--primary-dark);
@@ -99,7 +99,7 @@ a {
 }
 
 /* ============================================
-   CARDS (Wider, cleaner)
+   CARDS
    ============================================ */
 .card {
   background: var(--bg-card);
@@ -127,7 +127,7 @@ a {
 }
 
 /* ============================================
-   BUTTONS (Emerald primary)
+   BUTTONS
    ============================================ */
 .btn {
   display: inline-flex;
@@ -232,30 +232,51 @@ textarea:focus {
 }
 
 /* ============================================
-   TABLES (Full width)
+   TABLES (Unified – clean alignment + nowrap)
    ============================================ */
 .table-responsive {
   overflow-x: auto;
   margin: 0 -4px;
 }
-table {
+
+.table-responsive table {
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
 }
-table th,
-table td {
-  padding: 14px 16px;
+
+.table-responsive table th,
+.table-responsive table td {
+  padding: 12px 16px;
   border-bottom: 1px solid var(--border-color);
   text-align: left;
+  vertical-align: middle;
 }
-table th {
+
+.table-responsive table th {
   background: #f1f5f9;
   font-weight: 600;
   color: var(--primary-color);
+  white-space: nowrap;
 }
-table tr:hover {
-  background: #f8fafc;
+
+/* ---- Numeric / Amount columns (right‑aligned) ---- */
+.table-responsive table td.text-end,
+.table-responsive table td.amount,
+.table-responsive table td.rollno {
+  text-align: right;
+  font-feature-settings: "tnum";
+}
+
+/* ---- Action buttons (center + no wrap) ---- */
+.table-responsive table td.actions {
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ---- Key identifiers (Receipt, Name, etc.) – keep on one line ---- */
+.table-responsive table td.nowrap {
+  white-space: nowrap;
 }
 
 /* ============================================
@@ -397,7 +418,7 @@ table tr:hover {
 }
 
 /* ============================================
-   RESPONSIVE (Wider approach)
+   RESPONSIVE
    ============================================ */
 @media (max-width: 992px) {
   .container {
