@@ -1,6 +1,7 @@
 // ============================================
 //  STUDENTS PAGE LOGIC (Firebase Ready)
-//  UPDATED: Added "View Profile" button
+//  UPDATED: Added createdAt for admissions tracking
+//  Includes: View Profile button, Search, Filter, Sort, CRUD
 // ============================================
 
 // Helper: class order for sorting (Nursery → LKG → UKG → 1 → 2 → ... → 8)
@@ -26,21 +27,21 @@ function renderStudents(list) {
       <td>${s.email}</td>
       <td class="nowrap">${s.phone}</td>
       <td class="actions">
-        <!-- ===== NEW "VIEW PROFILE" BUTTON ===== -->
+        <!-- View Profile Button -->
         <a href="profile.html?id=${s.id}" class="btn btn-primary btn-sm" title="View Profile">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
             <circle cx="12" cy="7" r="4"/>
           </svg>
         </a>
-        <!-- ===== EDIT BUTTON ===== -->
+        <!-- Edit Button -->
         <button class="btn btn-primary btn-sm" onclick="editStudent('${s.id}')">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
             <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
           </svg>
         </button>
-        <!-- ===== DELETE BUTTON ===== -->
+        <!-- Delete Button -->
         <button class="btn btn-danger btn-sm" onclick="deleteStudent('${s.id}')">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="3 6 5 6 21 6"/>
@@ -100,9 +101,16 @@ document.getElementById('studentForm').addEventListener('submit', async function
   const studentData = { name, class: cls, section, rollNo, email, phone, address };
 
   if (id) {
+    // Update existing student (preserve createdAt if it exists)
+    const existing = DataService.getStudentById(id);
+    if (existing && existing.createdAt) {
+      studentData.createdAt = existing.createdAt;
+    }
     await DataService.updateStudent({ ...studentData, id });
     showToast('Student updated!', 'success');
   } else {
+    // ===== ADD createdAt FOR NEW STUDENTS =====
+    studentData.createdAt = Date.now();
     await DataService.addStudent(studentData);
     showToast('Student added!', 'success');
   }
@@ -110,7 +118,7 @@ document.getElementById('studentForm').addEventListener('submit', async function
   closeModal('addStudentModal');
   this.reset();
   document.getElementById('editStudentId').value = '';
-  // No need to call filterStudents() – the 'dataChanged' event will trigger it automatically
+  // The 'dataChanged' event will automatically refresh the list
 });
 
 function editStudent(id) {
