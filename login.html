@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login – Morning Glory English Academy</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        /* Minimal login specific */
+        .login-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: var(--gray-50);
+            padding: 20px;
+        }
+        .login-card {
+            background: #ffffff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            padding: 40px 32px;
+            max-width: 420px;
+            width: 100%;
+            border: 1px solid var(--gray-200);
+        }
+        .login-card h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .login-card .sub {
+            text-align: center;
+            color: var(--gray-500);
+            margin-bottom: 28px;
+            font-size: 0.95rem;
+        }
+        .login-card .form-group {
+            margin-bottom: 20px;
+        }
+        .login-card .form-group label {
+            display: block;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--gray-700);
+            margin-bottom: 4px;
+        }
+        .login-card .form-group input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--gray-300);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .login-card .form-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79,70,229,0.15);
+            outline: none;
+        }
+        .login-card .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background var(--transition-speed) ease;
+        }
+        .login-card .btn-login:hover {
+            background: var(--primary-dark);
+        }
+        .login-card .error-msg {
+            color: var(--danger);
+            font-size: 0.9rem;
+            margin-top: 12px;
+            text-align: center;
+        }
+        .login-card .footer-text {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--gray-400);
+        }
+        .login-card .brand-icon {
+            display: block;
+            margin: 0 auto 16px;
+            width: 60px;
+            height: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-wrapper">
+        <div class="login-card">
+            <!-- Logo SVG (without emoji) -->
+            <svg class="brand-icon" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="56" height="56" rx="14" stroke="#4F46E5" stroke-width="4" />
+                <path d="M16 44V16H30C34 16 38 18.5 38 22C38 25.5 34 28 30 28H22M36 44L30 28H22L16 44" stroke="#4F46E5" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M44 28V44M44 28H38M44 28H50" stroke="#4F46E5" stroke-width="3.5" stroke-linecap="round" />
+            </svg>
+
+            <h1>Morning Glory</h1>
+            <p class="sub">Sign in to your account</p>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="admin@school.edu" required />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required />
+                </div>
+                <button type="submit" class="btn-login">Sign In</button>
+                <div id="loginError" class="error-msg"></div>
+            </form>
+
+            <div class="footer-text">
+                &copy; 2026 Morning Glory English Academy
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase and RBAC (for login only) -->
+    <script type="importmap">
+        {
+            "imports": {
+                "firebase/app": "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js",
+                "firebase/auth": "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js",
+                "firebase/database": "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"
+            }
+        }
+    </script>
+    <script type="module">
+        import { auth } from './js/firebase-init.js';
+        import { signInWithEmailAndPassword } from 'firebase/auth';
+
+        const form = document.getElementById('loginForm');
+        const errorDiv = document.getElementById('loginError');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            errorDiv.textContent = '';
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                window.location.href = 'index.html';
+            } catch (err) {
+                errorDiv.textContent = err.message || 'Login failed. Please try again.';
+            }
+        });
+    </script>
+</body>
+</html>
