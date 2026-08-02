@@ -1,0 +1,115 @@
+/* ============================================
+   SMART FEE COLLECTION STYLES (Standalone)
+   Does NOT modify existing styles.css
+   ============================================ */
+
+.smart-fee-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.smart-fee-grid .fee-item {
+  background: #f8fafc;
+  border-radius: var(--border-radius);
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+}
+
+.smart-fee-grid .fee-item .label {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.smart-fee-grid .fee-item .value {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.smart-fee-grid .fee-item .value.positive {
+  color: var(--accent-color);
+}
+.smart-fee-grid .fee-item .value.negative {
+  color: #e11d48;
+}
+.smart-fee-grid .fee-item .value.neutral {
+  color: #d97706;
+}
+
+.smart-fee-input {
+  display: flex;
+  gap: 16px;
+  align-items: end;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.smart-fee-input .form-group {
+  flex: 1;
+  min-width: 150px;
+  margin-bottom: 0;
+}
+
+.smart-fee-input .form-group label {
+  font-size: 13px;
+}
+
+.smart-fee-input .current-payment {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  padding: 6px 0;
+}
+
+.remaining-balance {
+  padding: 10px 16px;
+  border-radius: var(--border-radius);
+  background: #f1f5f9;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 12px;
+}
+
+.remaining-balance .amount {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.remaining-balance.valid {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+}
+.remaining-balance.valid .amount {
+  color: var(--accent-color);
+}
+
+.remaining-balance.invalid {
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+}
+.remaining-balance.invalid .amount {
+  color: #e11d48;
+}
+
+.smart-fee-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: end;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+@media (max-width: 768px) {
+  .smart-fee-grid {
+    grid-template-columns: 1fr;
+  }
+  .smart-fee-input {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
