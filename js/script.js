@@ -34,47 +34,81 @@ function validatePhone(phone) {
 }
 
 function showToast(message, type = 'info') {
-  alert(message); // Placeholder – upgrade to custom toast later
+  alert(message); // You can later replace this with a custom toast UI
 }
 
 // ============================================
-//  DATA SERVICE (FIREBASE READY - NO DEMO DATA)
-//  All arrays are EMPTY by default.
+//  DATA SERVICE (FIREBASE REALTIME DATABASE)
+//  All CRUD operations now read/write to Firebase.
+//  No demo data – everything comes from the cloud.
 // ============================================
 
 const DataService = {
-  students: [],
-  fees: [],
+  _students: [],
+  _fees: [],
+  _listeners: [],
 
+  // ---------- INIT: Start listening to Firebase ----------
+  init() {
+    // Listen to Students
+    firebase.database().ref('students').on('value', (snapshot) => {
+      const data = snapshot.val();
+      this._students = data ? Object.values(data) : [];
+      // Dispatch event to update UI
+      window.dispatchEvent(new CustomEvent('dataChanged'));
+    });
+
+    // Listen to Fees
+    firebase.database().ref('fees').on('value', (snapshot) => {
+      const data = snapshot.val();
+      this._fees = data ? Object.values(data) : [];
+      window.dispatchEvent(new CustomEvent('dataChanged'));
+    });
+  },
+
+  // ---------- READ ----------
   getStudents() {
-    return this.students;
+    return this._students;
   },
   getStudentById(id) {
-    return this.students.find(s => s.id === id);
-  },
-  addStudent(student) {
-    student.id = 's' + Date.now();
-    this.students.push(student);
-    return student;
-  },
-  updateStudent(updated) {
-    const index = this.students.findIndex(s => s.id === updated.id);
-    if (index !== -1) this.students[index] = updated;
-    return updated;
-  },
-  deleteStudent(id) {
-    this.students = this.students.filter(s => s.id !== id);
-    this.fees = this.fees.filter(f => f.studentId !== id);
-  },
-  getFeesForStudent(studentId) {
-    return this.fees.filter(f => f.studentId === studentId);
-  },
-  addFeeRecord(fee) {
-    fee.id = 'f' + Date.now();
-    this.fees.push(fee);
-    return fee;
+    return this._students.find(s => s.id === id);
   },
   getAllFees() {
-    return this.fees;
+    return this._fees;
+  },
+  getFeesForStudent(studentId) {
+    return this._fees.filter(f => f.studentId === studentId);
+  },
+
+  // ---------- CREATE ----------
+  async addStudent(student) {
+    student.id = 's' + Date.now();
+    await firebase.database().ref('students/' + student.id).set(student);
+    return student;
+  },
+  async addFeeRecord(fee) {
+    fee.id = 'f' + Date.now();
+    await firebase.database().ref('fees/' + fee.id).set(fee);
+    return fee;
+  },
+
+  // ---------- UPDATE ----------
+  async updateStudent(updated) {
+    await firebase.database().ref('students/' + updated.id).update(updated);
+    return updated;
+  },
+
+  // ---------- DELETE ----------
+  async deleteStudent(id) {
+    // Delete student
+    await firebase.database().ref('students/' + id).remove();
+    // Delete all associated fees
+    const feesToRemove = this._fees.filter(f => f.studentId === id);
+    for (let fee of feesToRemove) {
+      await firebase.database().ref('fees/' + fee.id).remove();
+    }
   }
 };
+
+// Auto-init when script loads
+DataService.init();
