@@ -1,13 +1,13 @@
 // ============================================
 // js/firebase-config.js – Firebase Initialization
-// Uses provided config – no manual setup needed
 // ============================================
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, query, getDocs } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
-// Your Firebase configuration (copied from provided SDK)
+// Your web app's Firebase configuration (from provided SDK)
 const firebaseConfig = {
   apiKey: "AIzaSyBCdSPOM47RDoQpH2uIOlGpphS6RAiyWao",
   authDomain: "skill2jobvisitcount.firebaseapp.com",
@@ -21,12 +21,14 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Expose globally for use in other scripts
+// Expose globally for use in other scripts (auth-rbac.js, etc.)
 window.auth = auth;
 window.db = db;
+window.analytics = analytics;
 window.signInWithEmailAndPassword = signInWithEmailAndPassword;
 window.signOut = signOut;
 window.doc = doc;
