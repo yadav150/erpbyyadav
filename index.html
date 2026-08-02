@@ -5,15 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard · School ERP</title>
   <link rel="stylesheet" href="css/styles.css">
-  <!-- ===== NEW SEARCH CSS ===== -->
+  <!-- ===== NEW DASHBOARD CSS ===== -->
+  <link rel="stylesheet" href="css/dashboard-analytics.css">
   <link rel="stylesheet" href="css/search.css">
   
   <!-- ===== FIREBASE SDK ===== -->
   <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
+  
+  <!-- ===== CHART.JS FOR ANALYTICS ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
-  <!-- ========== NAVBAR (UPDATED with Search) ========== -->
+  <!-- ========== NAVBAR ========== -->
   <nav class="navbar">
     <div class="container" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
       <span class="brand">
@@ -29,7 +33,6 @@
           <a href="students.html">Students</a>
           <a href="fees.html">Fees</a>
         </div>
-        <!-- ===== GLOBAL SEARCH ===== -->
         <div class="search-container">
           <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="11" cy="11" r="8"/>
@@ -42,131 +45,167 @@
     </div>
   </nav>
 
-  <!-- ========== MAIN CONTENT (Unchanged) ========== -->
+  <!-- ========== MAIN CONTENT ========== -->
   <main class="container" style="padding-top: 32px;">
-    <!-- Your existing dashboard content remains exactly the same -->
-    <h1 style="margin-bottom: 24px; font-weight: 600;">Dashboard</h1>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-bottom: 32px;">
-      <div class="card" style="text-align: center; padding: 20px;">
-        <div style="font-size: 2.2rem; font-weight: 700; color: var(--primary-dark);" id="totalStudents">0</div>
-        <div style="color: var(--text-muted);">Total Students</div>
+    <h1 style="margin-bottom: 24px; font-weight: 600;">Dashboard Analytics</h1>
+
+    <!-- ===== SUMMARY CARDS (6 cards) ===== -->
+    <div class="analytics-grid">
+      <!-- Card 1: Total Students -->
+      <div class="analytics-card">
+        <div class="card-top">
+          <div>
+            <div class="card-number" id="totalStudents">0</div>
+            <div class="card-label">Total Students</div>
+          </div>
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+        </div>
       </div>
-      <div class="card" style="text-align: center; padding: 20px;">
-        <div style="font-size: 2.2rem; font-weight: 700; color: var(--accent-color);" id="totalFeesCollected">₹0</div>
-        <div style="color: var(--text-muted);">Fees Collected</div>
+
+      <!-- Card 2: Today's Collection -->
+      <div class="analytics-card">
+        <div class="card-top">
+          <div>
+            <div class="card-number" id="todayCollection">₹0</div>
+            <div class="card-label">Today's Collection</div>
+          </div>
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </div>
+        </div>
       </div>
-      <div class="card" style="text-align: center; padding: 20px;">
-        <div style="font-size: 2.2rem; font-weight: 700; color: #e11d48;" id="pendingFees">₹0</div>
-        <div style="color: var(--text-muted);">Pending Fees</div>
+
+      <!-- Card 3: Total Collection -->
+      <div class="analytics-card">
+        <div class="card-top">
+          <div>
+            <div class="card-number" id="totalFeesCollected">₹0</div>
+            <div class="card-label">Total Collection</div>
+          </div>
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+          </div>
+        </div>
       </div>
-      <div class="card" style="text-align: center; padding: 20px;">
-        <div style="font-size: 2.2rem; font-weight: 700; color: #d97706;" id="pendingCount">0</div>
-        <div style="color: var(--text-muted);">Pending Students</div>
+
+      <!-- Card 4: Pending Fees -->
+      <div class="analytics-card">
+        <div class="card-top">
+          <div>
+            <div class="card-number" id="pendingFees">₹0</div>
+            <div class="card-label">Pending Fees</div>
+          </div>
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5: Students with Due Fees -->
+      <div class="analytics-card">
+        <div class="card-top">
+          <div>
+            <div class="card-number" id="studentsWithDue">0</div>
+            <div class="card-label">Students with Due</div>
+          </div>
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M12 8v4"/>
+              <path d="M12 16h.01"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6: Recent Admissions -->
+      <div class="analytics-card">
+        <div class="card-top">
+          <div>
+            <div class="card-number" id="recentAdmissions">0</div>
+            <div class="card-label">Recent Admissions (7 days)</div>
+          </div>
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+              <path d="M12 3v8M9 8l3 3 3-3"/>
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="card">
-      <div class="card-header">Recent Students</div>
-      <div class="table-responsive">
-        <table>
-          <thead><tr><th>Name</th><th>Class</th><th>Section</th><th>Roll No</th></tr></thead>
-          <tbody id="recentStudentsTable">
-            <tr><td colspan="4" style="text-align:center; color:var(--text-muted); padding: 40px 0;">Loading students...</td></tr>
-          </tbody>
-        </table>
+    <!-- ===== CHARTS (3 charts) ===== -->
+    <div class="charts-grid">
+      <!-- Chart 1: Monthly Fee Collection -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <span class="chart-title">Monthly Fee Collection</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="monthlyChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Chart 2: Student Distribution by Class -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <span class="chart-title">Students by Class</span>
+        </div>
+        <div class="chart-container pie-chart">
+          <canvas id="classDistributionChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Chart 3: Paid vs Pending Fees -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <span class="chart-title">Fee Status</span>
+        </div>
+        <div class="chart-container pie-chart">
+          <canvas id="feeStatusChart"></canvas>
+        </div>
       </div>
     </div>
 
-    <div class="card">
-      <div class="card-header">Recent Fee Payments</div>
-      <div class="table-responsive">
-        <table>
-          <thead><tr><th>Student</th><th>Amount</th><th>Date</th><th>Receipt</th></tr></thead>
-          <tbody id="recentFeesTable">
-            <tr><td colspan="4" style="text-align:center; color:var(--text-muted); padding: 40px 0;">Loading fees...</td></tr>
-          </tbody>
-        </table>
+    <!-- ===== RECENT ACTIVITY ===== -->
+    <div class="activity-card">
+      <div class="activity-header">
+        <span class="activity-title">Recent Activity</span>
+        <span style="font-size:12px; color:var(--text-muted);">Live updates</span>
+      </div>
+      <div class="activity-list" id="activityList">
+        <div class="activity-empty">Loading activity...</div>
       </div>
     </div>
   </main>
-
-  <!-- ========== STUDENT PROFILE MODAL (NEW) ========== -->
-  <div class="modal-overlay" id="studentProfileModal">
-    <div class="modal" style="max-width: 640px;">
-      <div class="modal-header">
-        <h3>Student Profile</h3>
-        <button class="modal-close" onclick="closeModal('studentProfileModal')">&times;</button>
-      </div>
-      <div id="studentProfileContent">
-        <!-- Dynamically filled by search.js -->
-      </div>
-    </div>
-  </div>
 
   <!-- ========== FOOTER ========== -->
   <footer class="footer">
     <div class="container">Yadav Web technologies</div>
   </footer>
 
-  <!-- ===== SCRIPTS (UPDATED) ===== -->
+  <!-- ===== SCRIPTS (UPDATED ORDER) ===== -->
   <script src="js/firebase-config.js"></script>
   <script src="js/script.js"></script>
-  <!-- ===== NEW SEARCH SCRIPT ===== -->
   <script src="js/search.js"></script>
-  <!-- Dashboard logic remains unchanged -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Your existing dashboard code stays exactly the same
-      // (I am keeping it here for completeness)
-      function loadDashboardData() {
-        const students = DataService.getStudents();
-        const fees = DataService.getAllFees();
-
-        document.getElementById('totalStudents').textContent = students.length;
-        const totalCollected = fees.filter(f => f.status === 'paid').reduce((sum, f) => sum + f.amount, 0);
-        document.getElementById('totalFeesCollected').textContent = formatCurrency(totalCollected);
-        const pending = fees.filter(f => f.status === 'pending').reduce((sum, f) => sum + f.amount, 0);
-        document.getElementById('pendingFees').textContent = formatCurrency(pending);
-        const pendingCount = new Set(fees.filter(f => f.status === 'pending').map(f => f.studentId)).size;
-        document.getElementById('pendingCount').textContent = pendingCount;
-
-        const recentStudents = students.slice(-5).reverse();
-        const recentStudentsBody = document.getElementById('recentStudentsTable');
-        if (recentStudents.length === 0) {
-          recentStudentsBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:var(--text-muted); padding: 40px 0;">No students added yet.</td></tr>`;
-        } else {
-          recentStudentsBody.innerHTML = recentStudents.map(s => `
-            <tr>
-              <td class="nowrap">${s.name}</td>
-              <td>${s.class}</td>
-              <td>${s.section}</td>
-              <td class="rollno">${s.rollNo}</td>
-            </tr>
-          `).join('');
-        }
-
-        const recentFees = fees.slice(-5).reverse();
-        const recentFeesBody = document.getElementById('recentFeesTable');
-        if (recentFees.length === 0) {
-          recentFeesBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:var(--text-muted); padding: 40px 0;">No fee records found.</td></tr>`;
-        } else {
-          recentFeesBody.innerHTML = recentFees.map(f => {
-            const student = DataService.getStudentById(f.studentId);
-            return `
-              <tr>
-                <td class="nowrap">${student ? student.name : 'Unknown'}</td>
-                <td class="amount">${formatCurrency(f.amount)}</td>
-                <td class="nowrap">${f.paidDate || '—'}</td>
-                <td class="nowrap">${f.receiptNo || '—'}</td>
-              </tr>
-            `;
-          }).join('');
-        }
-      }
-
-      loadDashboardData();
-      window.addEventListener('dataChanged', loadDashboardData);
-    });
-  </script>
+  <!-- ===== NEW DASHBOARD ANALYTICS SCRIPT ===== -->
+  <script src="js/dashboard-analytics.js"></script>
 </body>
 </html>
