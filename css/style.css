@@ -444,3 +444,153 @@ ul { list-style: none; }
     transition: opacity var(--transition-speed) ease;
 }
 .sidebar-overlay.active { display: block; opacity: 1; }
+
+/* ============================================
+   css/style.css – ADDITIONS FOR PHASE 2
+   Modals, Toasts, Spinners, Print, Responsive
+   ============================================ */
+
+/* ---------- Animations ---------- */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ---------- Modal Backdrop ---------- */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 9998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.modal-backdrop.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* ---------- Modal Container ---------- */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.25s ease;
+}
+.modal.active {
+    display: flex;
+}
+.modal-content {
+    background: #ffffff;
+    border-radius: 16px;
+    max-width: 560px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 28px 32px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    position: relative;
+}
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--gray-200);
+}
+.modal-header h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--gray-800);
+    margin: 0;
+}
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--gray-400);
+    padding: 0 8px;
+    transition: color 0.2s ease;
+}
+.modal-close:hover { color: var(--gray-700); }
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--gray-200);
+}
+
+/* ---------- Toast Container ---------- */
+/* (already defined in utils.js) */
+
+/* ---------- Empty & Loading States ---------- */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--gray-400);
+}
+.empty-state svg {
+    margin-bottom: 12px;
+    opacity: 0.5;
+}
+.empty-state p {
+    font-size: 0.95rem;
+}
+
+/* ---------- Print Styles (for Receipt) ---------- */
+@media print {
+    .sidebar, .top-header, .site-footer, .action-bar, .no-print {
+        display: none !important;
+    }
+    .main-wrapper {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+    .page-content {
+        padding: 20px !important;
+    }
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+    }
+    .modal {
+        display: none !important;
+    }
+    .modal-backdrop {
+        display: none !important;
+    }
+}
+
+/* ---------- Responsive Modal ---------- */
+@media (max-width: 600px) {
+    .modal-content {
+        padding: 20px 16px;
+        margin: 10px;
+        max-height: 95vh;
+    }
+    .modal-footer {
+        flex-direction: column;
+    }
+    .modal-footer .btn-sm {
+        width: 100%;
+        text-align: center;
+    }
+}
