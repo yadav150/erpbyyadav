@@ -1,20 +1,22 @@
 // ============================================
-// js/firebase-config.js – Firebase Setup
+// js/firebase-config.js – Firebase Initialization
+// Uses provided config – no manual setup needed
 // ============================================
 
-// Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, query, getDocs } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
-// Your Firebase configuration (REPLACE WITH YOUR OWN)
+// Your Firebase configuration (copied from provided SDK)
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyBCdSPOM47RDoQpH2uIOlGpphS6RAiyWao",
+  authDomain: "skill2jobvisitcount.firebaseapp.com",
+  databaseURL: "https://skill2jobvisitcount-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "skill2jobvisitcount",
+  storageBucket: "skill2jobvisitcount.firebasestorage.app",
+  messagingSenderId: "765089407089",
+  appId: "1:765089407089:web:a410facdd7dfb6e1fbbbd0",
+  measurementId: "G-S5X1VJQS79"
 };
 
 // Initialize Firebase
