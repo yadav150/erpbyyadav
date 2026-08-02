@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-
-    <!-- SIDEBAR (same as index, active="students") -->
+    <!-- SIDEBAR (SAME AS INDEX) -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-brand">
             <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -27,105 +26,66 @@
             <a href="reports.html" class="nav-link"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="12" width="4" height="6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="8" y="8" width="4" height="10" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="14" y="4" width="4" height="14" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Reports</span></a>
             <a href="settings.html" class="nav-link"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M10 2V4M10 16V18M4 10H2M18 10H16M5.5 5.5L4 4M15.5 15.5L17 17M5.5 14.5L4 16M15.5 4.5L17 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Settings</span></a>
         </nav>
-        <div class="sidebar-footer">
-            <span class="version">v2.0</span>
-            <span class="school-name">Morning Glory English Academy</span>
-        </div>
+        <div class="sidebar-footer"><span class="version">v2.0</span><span class="school-name">Morning Glory English Academy</span></div>
     </aside>
 
-    <!-- MAIN WRAPPER -->
     <div class="main-wrapper" id="mainWrapper">
-
-        <!-- HEADER (with logout) -->
         <header class="top-header">
-            <div class="header-left">
-                <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6H21M3 12H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-                </button>
-                <h1 class="page-title">Students</h1>
-            </div>
-            <div class="header-right">
-                <span class="greeting" id="greetingText">Welcome, Admin</span>
-                <button id="logoutBtn" style="background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:6px;color:var(--gray-600);padding:4px 8px;border-radius:8px;transition:background 0.2s;" onmouseover="this.style.background='var(--gray-100)'" onmouseout="this.style.background='transparent'">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M8 2H3C1.89543 2 1 2.89543 1 4V16C1 17.1046 1.89543 18 3 18H8M13 14L17 10M17 10L13 6M17 10H8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span style="font-size:0.85rem;font-weight:500;">Logout</span>
-                </button>
-                <div class="avatar">
-                    <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="#E5E7EB" stroke-width="2"/><circle cx="18" cy="13" r="5" stroke="#E5E7EB" stroke-width="2"/><path d="M6 29C6 24.0294 10.0294 20 15 20H21C25.9706 20 30 24.0294 30 29" stroke="#E5E7EB" stroke-width="2" stroke-linecap="round"/></svg>
-                </div>
-            </div>
+            <div class="header-left"><button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6H21M3 12H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><h1 class="page-title">Students</h1></div>
+            <div class="header-right"><span class="greeting">Welcome, Admin</span><div class="avatar"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="#E5E7EB" stroke-width="2"/><circle cx="18" cy="13" r="5" stroke="#E5E7EB" stroke-width="2"/><path d="M6 29C6 24.0294 10.0294 20 15 20H21C25.9706 20 30 24.0294 30 29" stroke="#E5E7EB" stroke-width="2" stroke-linecap="round"/></svg></div></div>
         </header>
 
-        <!-- PAGE CONTENT -->
         <main class="page-content">
             <div class="action-bar">
                 <div class="left">
-                    <input type="text" class="form-input" placeholder="Search by name or ID..." style="width:260px;" />
-                    <select class="form-select" style="width:160px;">
-                        <option value="">All Classes</option>
-                        <option value="1">Class 1</option><option value="2">Class 2</option><option value="3">Class 3</option>
-                        <option value="4">Class 4</option><option value="5">Class 5</option><option value="6">Class 6</option>
-                        <option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option>
-                        <option value="10">Class 10</option><option value="11">Class 11</option><option value="12">Class 12</option>
-                    </select>
+                    <input type="text" class="form-input" id="searchStudent" placeholder="Search by name or roll no..." style="width:260px;" />
+                    <select class="form-select" id="classFilter" style="width:160px;"><option value="">All Classes</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select>
                 </div>
-                <button class="btn-sm btn-primary">+ Add Student</button>
+                <button class="btn-sm btn-primary" onclick="window.openModal('studentModal')">+ Add Student</button>
             </div>
+
             <div class="card">
                 <div class="table-responsive">
                     <table class="data-table">
-                        <thead><tr><th>Roll No</th><th>Name</th><th>Class</th><th>Guardian</th><th>Contact</th><th>Status</th></tr></thead>
-                        <tbody id="studentsTableBody"><tr class="empty-row"><td colspan="6">No students enrolled yet.</td></tr></tbody>
+                        <thead><tr><th>Roll No</th><th>Name</th><th>Class</th><th>Guardian</th><th>Contact</th><th>Status</th><th>Actions</th></tr></thead>
+                        <tbody id="studentsTableBody"><tr class="empty-row"><td colspan="7">Loading students...</td></tr></tbody>
                     </table>
                 </div>
             </div>
         </main>
 
-        <!-- FOOTER -->
-        <footer class="site-footer">
-            <div class="footer-content">
-                <span>&copy; 2026 <strong>Morning Glory English Academy</strong></span>
-                <span>Developed by <strong>Yadab Web Technologies</strong></span>
-            </div>
-        </footer>
+        <footer class="site-footer"><div class="footer-content"><span>&copy; 2026 <strong>Morning Glory English Academy</strong></span><span>Developed by <strong>Yadab Web Technologies</strong></span></div></footer>
+    </div>
+
+    <!-- ===== MODAL ===== -->
+    <div class="modal-backdrop"></div>
+    <div class="modal" id="studentModal">
+        <div class="modal-content">
+            <div class="modal-header"><h3>Add / Edit Student</h3><button class="modal-close">&times;</button></div>
+            <form id="studentForm">
+                <input type="hidden" id="studentId" />
+                <div class="form-row">
+                    <div class="form-group"><label>Roll No</label><input type="text" class="form-input" id="rollNo" placeholder="e.g. S001" required /></div>
+                    <div class="form-group"><label>Full Name</label><input type="text" class="form-input" id="studentName" placeholder="e.g. Rahul Sharma" required /></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Class</label><select class="form-select" id="studentClass"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select></div>
+                    <div class="form-group"><label>Guardian Name</label><input type="text" class="form-input" id="guardian" placeholder="e.g. Mr. Sharma" /></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Contact</label><input type="text" class="form-input" id="studentContact" placeholder="+91 98765 43210" /></div>
+                    <div class="form-group"><label>Status</label><select class="form-select" id="studentStatus"><option value="active">Active</option><option value="inactive">Inactive</option></select></div>
+                </div>
+                <div class="form-group"><label>Address</label><textarea class="form-input" id="studentAddress" rows="2" placeholder="Full address"></textarea></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-sm modal-cancel">Cancel</button>
+                    <button type="submit" class="btn-sm btn-primary">Save Student</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <div class="sidebar-overlay"></div>
-
-    <!-- Firebase & Authentication (same module pattern) -->
-    <script type="importmap">
-        {
-            "imports": {
-                "firebase/app": "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js",
-                "firebase/auth": "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js",
-                "firebase/database": "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"
-            }
-        }
-    </script>
-    <script type="module" src="js/firebase-init.js"></script>
-    <script type="module">
-        import { auth } from './js/firebase-init.js';
-        import { onAuthStateChanged, signOut } from 'firebase/auth';
-
-        const logoutBtn = document.getElementById('logoutBtn');
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', () => {
-                signOut(auth).then(() => {
-                    window.location.href = 'login.html';
-                });
-            });
-        }
-
-        onAuthStateChanged(auth, (user) => {
-            if (!user && window.location.pathname.indexOf('login.html') === -1) {
-                window.location.href = 'login.html';
-            }
-            if (user) {
-                const greeting = document.getElementById('greetingText');
-                if (greeting) greeting.textContent = `Welcome, ${user.displayName || user.email || 'User'}`;
-            }
-        });
-    </script>
-    <script src="js/script.js"></script>
+    <script type="module" src="js/app.js"></script>
 </body>
 </html>
