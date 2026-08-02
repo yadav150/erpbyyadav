@@ -1,0 +1,163 @@
+/* ============================================
+   css/rbac.css – Login & Access Denied
+   Extends global styles – no existing CSS edited
+   ============================================ */
+
+/* ---------- Login Page ---------- */
+.login-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: var(--gray-50);
+    padding: 20px;
+}
+
+.login-card {
+    background: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    padding: 40px 36px;
+    max-width: 420px;
+    width: 100%;
+    border: 1px solid var(--gray-200);
+}
+
+.login-card .brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.login-card .brand-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--gray-900);
+}
+
+.login-card .login-title {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gray-800);
+    margin-bottom: 24px;
+}
+
+.login-card .form-group {
+    margin-bottom: 18px;
+}
+
+.login-card .form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--gray-700);
+    margin-bottom: 4px;
+}
+
+.login-card .form-input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--gray-300);
+    font-size: 0.95rem;
+    transition: border var(--transition-speed) ease;
+    outline: none;
+}
+
+.login-card .form-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.login-card .btn-login {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background var(--transition-speed) ease;
+    margin-top: 8px;
+}
+
+.login-card .btn-login:hover {
+    background: var(--primary-dark);
+}
+
+.login-card .login-error {
+    color: var(--danger);
+    font-size: 0.85rem;
+    text-align: center;
+    margin-top: 12px;
+    min-height: 24px;
+}
+
+/* ---------- Access Denied Page ---------- */
+.denied-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: var(--gray-50);
+    padding: 20px;
+}
+
+.denied-card {
+    background: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    padding: 48px 40px;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid var(--gray-200);
+}
+
+.denied-card .denied-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 20px;
+    color: var(--danger);
+    opacity: 0.8;
+}
+
+.denied-card h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 8px;
+}
+
+.denied-card p {
+    color: var(--gray-500);
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+}
+
+.denied-card .btn-primary {
+    display: inline-block;
+    padding: 10px 32px;
+    background: var(--primary);
+    color: #ffffff;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background var(--transition-speed) ease;
+}
+
+.denied-card .btn-primary:hover {
+    background: var(--primary-dark);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+    .login-card { padding: 28px 20px; }
+    .denied-card { padding: 32px 20px; }
+    .denied-card h1 { font-size: 1.3rem; }
+}
