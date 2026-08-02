@@ -19,13 +19,34 @@
             <span class="brand-text">Morning Glory</span>
         </div>
         <nav class="sidebar-nav">
-            <a href="index.html" class="nav-link"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 10L10 2L18 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 8V16H16V8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="7" y="12" width="6" height="4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Dashboard</span></a>
-            <a href="students.html" class="nav-link"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M3 17C3 14.2386 5.23858 12 8 12H12C14.7614 12 17 14.2386 17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Students</span></a>
-            <a href="teachers.html" class="nav-link"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="6" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M3 16C3 13.2386 5.23858 11 8 11H12C14.7614 11 17 13.2386 17 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="8" y="14" width="4" height="4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Teachers</span></a>
-            <a href="fees.html" class="nav-link"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Fees</span></a>
-            <a href="salary.html" class="nav-link active"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="5" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 9H13M7 13H11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Salary</span></a>
-            <a href="reports.html" class="nav-link"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="12" width="4" height="6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="8" y="8" width="4" height="10" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="14" y="4" width="4" height="14" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Reports</span></a>
-            <a href="settings.html" class="nav-link"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M10 2V4M10 16V18M4 10H2M18 10H16M5.5 5.5L4 4M15.5 15.5L17 17M5.5 14.5L4 16M15.5 4.5L17 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Settings</span></a>
+            <a href="index.html" class="nav-link" data-permission="view_dashboard">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 10L10 2L18 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 8V16H16V8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="7" y="12" width="6" height="4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="students.html" class="nav-link" data-permission="manage_students">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M3 17C3 14.2386 5.23858 12 8 12H12C14.7614 12 17 14.2386 17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <span>Students</span>
+            </a>
+            <a href="teachers.html" class="nav-link" data-permission="manage_teachers">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="6" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M3 16C3 13.2386 5.23858 11 8 11H12C14.7614 11 17 13.2386 17 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="8" y="14" width="4" height="4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                <span>Teachers</span>
+            </a>
+            <a href="fees.html" class="nav-link" data-permission="manage_fees">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <span>Fees</span>
+            </a>
+            <a href="salary.html" class="nav-link active" data-permission="manage_salary">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="5" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 9H13M7 13H11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <span>Salary</span>
+            </a>
+            <a href="reports.html" class="nav-link" data-permission="view_reports">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="12" width="4" height="6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="8" y="8" width="4" height="10" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="14" y="4" width="4" height="14" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                <span>Reports</span>
+            </a>
+            <a href="settings.html" class="nav-link" data-permission="manage_settings">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M10 2V4M10 16V18M4 10H2M18 10H16M5.5 5.5L4 4M15.5 15.5L17 17M5.5 14.5L4 16M15.5 4.5L17 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <span>Settings</span>
+            </a>
         </nav>
         <div class="sidebar-footer">
             <span class="version">v2.0</span>
@@ -36,7 +57,7 @@
     <!-- ===== MAIN WRAPPER ===== -->
     <div class="main-wrapper" id="mainWrapper">
 
-        <!-- ===== HEADER (with Hamburger) ===== -->
+        <!-- ===== HEADER ===== -->
         <header class="top-header">
             <div class="header-left">
                 <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
@@ -46,6 +67,10 @@
             </div>
             <div class="header-right">
                 <span class="greeting">Welcome, Admin</span>
+                <button id="logoutBtn" style="background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:6px;color:var(--gray-600);padding:4px 8px;border-radius:8px;transition:background 0.2s;" onmouseover="this.style.background='var(--gray-100)'" onmouseout="this.style.background='transparent'">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M8 2H3C1.89543 2 1 2.89543 1 4V16C1 17.1046 1.89543 18 3 18H8M13 14L17 10M17 10L13 6M17 10H8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span style="font-size:0.85rem;font-weight:500;">Logout</span>
+                </button>
                 <div class="avatar">
                     <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="#E5E7EB" stroke-width="2"/><circle cx="18" cy="13" r="5" stroke="#E5E7EB" stroke-width="2"/><path d="M6 29C6 24.0294 10.0294 20 15 20H21C25.9706 20 30 24.0294 30 29" stroke="#E5E7EB" stroke-width="2" stroke-linecap="round"/></svg>
                 </div>
@@ -100,9 +125,26 @@
         </footer>
     </div>
 
-    <!-- Overlay for mobile -->
     <div class="sidebar-overlay"></div>
 
+    <!-- ===== RBAC & FIREBASE SCRIPTS ===== -->
+    <script type="importmap">
+        {
+            "imports": {
+                "firebase/app": "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js",
+                "firebase/auth": "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js",
+                "firebase/database": "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"
+            }
+        }
+    </script>
+    <script type="module" src="js/firebase-init.js"></script>
+    <script type="module" src="js/rbac.js"></script>
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', function() {
+            window.RBAC.init();
+            document.getElementById('logoutBtn').addEventListener('click', window.RBAC.logout);
+        });
+    </script>
     <script src="js/script.js"></script>
 </body>
 </html>
