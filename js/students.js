@@ -5,6 +5,14 @@
 let students = DataService.getStudents();
 let currentFiltered = [...students];
 
+// Helper: class order for sorting
+function getClassOrder(cls) {
+  const order = { 'Nursery': 0, 'LKG': 1, 'UKG': 2 };
+  const num = parseInt(cls);
+  if (!isNaN(num)) return num + 2; // 1 → 3, 2 → 4, ... 8 → 10
+  return order[cls] !== undefined ? order[cls] : 999;
+}
+
 function renderStudents(list) {
   const tbody = document.getElementById('studentsTableBody');
   if (list.length === 0) {
@@ -37,14 +45,15 @@ function filterStudents() {
   const sort = document.getElementById('sortBy').value;
 
   let filtered = students.filter(s => {
-    const matchSearch = s.name.toLowerCase().includes(search) || s.class.includes(search);
+    const matchSearch = s.name.toLowerCase().includes(search) || s.class.toLowerCase().includes(search);
     const matchClass = cls === '' || s.class === cls;
     return matchSearch && matchClass;
   });
 
+  // Sort with custom logic for Nursery–8
   filtered.sort((a, b) => {
     if (sort === 'name') return a.name.localeCompare(b.name);
-    if (sort === 'class') return a.class.localeCompare(b.class);
+    if (sort === 'class') return getClassOrder(a.class) - getClassOrder(b.class);
     if (sort === 'rollNo') return a.rollNo - b.rollNo;
     return 0;
   });
