@@ -191,7 +191,7 @@
     if (pageData.length === 0) {
       tbody.innerHTML = `
         <tr>
-          <td colspan="7" style="text-align:center; color:var(--text-muted); padding: 60px 20px;">
+          <td colspan="8" style="text-align:center; color:var(--text-muted); padding: 60px 20px;">
             <div style="font-size:1.2rem; margin-bottom:8px;">No receipts found</div>
             <div style="font-size:14px;">Try adjusting your filters or record a payment.</div>
           </td>
@@ -212,7 +212,7 @@
           <td><strong>${r.receiptNo}</strong></td>
           <td>${studentName}</td>
           <td>${studentClass}</td>
-          <td>${formatCurrency(r.amount)}</td>
+          <td style="text-align:right;">${formatCurrency(r.amount)}</td>
           <td>${formatDate(r.date)}</td>
           <td>
             <span class="receipt-status ${statusClass}">
@@ -424,11 +424,7 @@
 
     if (downloadPDF) {
       setTimeout(() => {
-        const printArea = document.getElementById('receiptPrintArea');
-        if (printArea) {
-          // Use window.print() with custom PDF settings
-          window.print();
-        }
+        window.print();
       }, 500);
     }
   }
