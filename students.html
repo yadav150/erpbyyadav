@@ -8,41 +8,148 @@
   <link rel="stylesheet" href="css/students.css">
 </head>
 <body>
-  <nav class="navbar">...</nav> <!-- Same as index -->
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar">
+    <div class="container">
+      <span class="brand">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 6V4M8 6V4M16 6V4M4 6h16v14H4z"/>
+          <path d="M8 10h8M8 14h6"/>
+        </svg>
+        School ERP
+      </span>
+      <div class="nav-links">
+        <a href="index.html">Dashboard</a>
+        <a href="students.html" class="active">Students</a>
+        <a href="fees.html">Fees</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== MAIN CONTENT ========== -->
   <main class="container" style="padding-top: 32px;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
-      <h1>Student Management</h1>
+      <h1 style="font-weight: 600;">Student Management</h1>
       <button class="btn btn-primary" onclick="openModal('addStudentModal')">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="5" x2="12" y2="19"/>
+          <line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
         Add Student
       </button>
     </div>
 
-    <!-- Filters (wide) -->
+    <!-- Filter & Search (Wide) -->
     <div class="card" style="display: flex; flex-wrap: wrap; gap: 20px; align-items: end;">
-      <div class="form-group" style="flex:2; min-width:180px;"><label>Search</label><input type="text" id="searchInput" placeholder="Name, class..." oninput="filterStudents()"></div>
-      <div class="form-group" style="flex:1; min-width:140px;"><label>Class</label><select id="classFilter" onchange="filterStudents()"><option value="">All</option><option value="9">9</option><option value="10">10</option></select></div>
-      <div class="form-group" style="flex:1; min-width:140px;"><label>Sort by</label><select id="sortBy" onchange="filterStudents()"><option value="name">Name</option><option value="class">Class</option><option value="rollNo">Roll No</option></select></div>
-      <div class="form-group" style="flex:0;"><button class="btn btn-outline-secondary" onclick="clearFilters()">Clear</button></div>
+      <div class="form-group" style="flex:2; min-width:180px;">
+        <label>Search</label>
+        <input type="text" id="searchInput" placeholder="Name, class..." oninput="filterStudents()">
+      </div>
+      <div class="form-group" style="flex:1; min-width:140px;">
+        <label>Class</label>
+        <select id="classFilter" onchange="filterStudents()">
+          <option value="">All</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </div>
+      <div class="form-group" style="flex:1; min-width:140px;">
+        <label>Sort by</label>
+        <select id="sortBy" onchange="filterStudents()">
+          <option value="name">Name</option>
+          <option value="class">Class</option>
+          <option value="rollNo">Roll No</option>
+        </select>
+      </div>
+      <div class="form-group" style="flex:0;">
+        <button class="btn btn-outline-secondary" onclick="clearFilters()">Clear</button>
+      </div>
     </div>
 
     <!-- Students Table -->
     <div class="card">
       <div class="table-responsive">
         <table>
-          <thead><tr><th>Name</th><th>Class</th><th>Section</th><th>Roll No</th><th>Email</th><th>Phone</th><th style="text-align:center;">Actions</th></tr></thead>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Class</th>
+              <th>Section</th>
+              <th>Roll No</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th style="text-align:center;">Actions</th>
+            </tr>
+          </thead>
           <tbody id="studentsTableBody">
-            <tr><td colspan="7" style="text-align:center; color:var(--text-muted);">No students found. Click "Add Student" to get started.</td></tr>
+            <tr>
+              <td colspan="7" style="text-align:center; color:var(--text-muted); padding: 40px 0;">
+                No students found. Click "Add Student" to get started.
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
     </div>
   </main>
 
-  <!-- Modal -->
-  <div class="modal-overlay" id="addStudentModal">... (same form as before) ...</div>
+  <!-- ========== ADD/EDIT STUDENT MODAL ========== -->
+  <div class="modal-overlay" id="addStudentModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">Add Student</h3>
+        <button class="modal-close" onclick="closeModal('addStudentModal')">&times;</button>
+      </div>
+      <form id="studentForm">
+        <input type="hidden" id="editStudentId">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="studentName" required>
+          </div>
+          <div class="form-group">
+            <label>Class</label>
+            <select id="studentClass" required>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Section</label>
+            <input type="text" id="studentSection" maxlength="1" placeholder="A" required>
+          </div>
+          <div class="form-group">
+            <label>Roll No</label>
+            <input type="number" id="studentRoll" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="studentEmail" required>
+        </div>
+        <div class="form-group">
+          <label>Phone (10 digits)</label>
+          <input type="text" id="studentPhone" pattern="[0-9]{10}" required>
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <textarea id="studentAddress" rows="2"></textarea>
+        </div>
+        <div style="display: flex; gap: 12px; justify-content: end;">
+          <button type="button" class="btn btn-outline-secondary" onclick="closeModal('addStudentModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="saveStudentBtn">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
-  <footer class="footer"><div class="container">Yadav Web technologies</div></footer>
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">Yadav Web technologies</div>
+  </footer>
+
   <script src="js/script.js"></script>
   <script src="js/students.js"></script>
 </body>
