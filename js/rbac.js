@@ -1,4 +1,4 @@
-// js/rbac.js
+// js/rbac.js – Role-Based Access Control
 import { auth, database } from './firebase-init.js';
 import { onAuthStateChanged } from 'firebase/auth';
 import { ref, get } from 'firebase/database';
@@ -44,12 +44,14 @@ const pagePermissionMap = {
 let currentUser = null;
 let currentRole = null;
 let currentPermissions = [];
+let authResolved = false;
+let pendingRedirect = false;
 
 // ---------- Helper: fetch role permissions (dynamic) ----------
 async function fetchRolePermissions(role) {
   // Optionally fetch from Firebase to allow real‑time updates
   // For now fallback to default map
-  return defaultRolePermissions[role] || [];
+  return defaultRolePermissions[role] || defaultRolePermissions['staff'];
 }
 
 // ---------- Main init ----------
@@ -57,20 +59,27 @@ function initRBAC() {
   onAuthStateChanged(auth, async (user) => {
     currentUser = user;
     if (user) {
-      const userRef = ref(database, 'users/' + user.uid);
-      const snapshot = await get(userRef);
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        currentRole = data.role || 'staff';
-        currentPermissions = await fetchRolePermissions(currentRole);
-      } else {
-        currentRole = null;
-        currentPermissions = [];
+      try {
+        const userRef = ref(database, 'users/' + user.uid);
+        const snapshot = await get(userRef);
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          currentRole = data.role || 'staff';
+        } else {
+          // No role data → assign default 'staff'
+          currentRole = 'staff';
+          console.warn('No role found for user, defaulting to staff');
+        }
+      } catch (err) {
+        console.error('Error fetching user role:', err);
+        currentRole = 'staff';
       }
+      currentPermissions = await fetchRolePermissions(currentRole);
     } else {
       currentRole = null;
       currentPermissions = [];
     }
+    authResolved = true;
     applyRBAC();
     checkPageAccess();
   });
@@ -88,35 +97,43 @@ function isLoggedIn() { return currentUser !== null; }
 
 // ---------- UI: hide unauthorized elements ----------
 function applyRBAC() {
-  // Nav links
+  if (!authResolved) return;
   document.querySelectorAll('.nav-link[data-permission]').forEach(link => {
     const perm = link.getAttribute('data-permission');
-    link.style.display = (perm && hasPermission(perm)) ? 'flex' : 'none';
+    const show = (perm && hasPermission(perm));
+    link.style.display = show ? 'flex' : 'none';
   });
 
-  // Quick action buttons (if any)
   document.querySelectorAll('.quick-btn[data-permission]').forEach(btn => {
     const perm = btn.getAttribute('data-permission');
-    btn.style.display = (perm && hasPermission(perm)) ? 'flex' : 'none';
+    const show = (perm && hasPermission(perm));
+    btn.style.display = show ? 'flex' : 'none';
   });
-
-  // Hide entire sections if needed (e.g., fee summary)
-  // (extend as required)
 }
 
 // ---------- Page access control ----------
 function checkPageAccess() {
+  if (!authResolved) return; // wait for auth to resolve
+
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
   const required = pagePermissionMap[currentPage];
   if (required) {
     if (!isLoggedIn()) {
-      window.location.href = 'login.html';
+      if (currentPage !== 'login.html' && currentPage !== 'access-denied.html') {
+        window.location.href = 'login.html';
+      }
       return;
     }
     if (!hasPermission(required)) {
-      window.location.href = 'access-denied.html';
+      if (currentPage !== 'access-denied.html') {
+        window.location.href = 'access-denied.html';
+      }
       return;
     }
+  }
+  // If we are on login page and already logged in, redirect to dashboard
+  if (currentPage === 'login.html' && isLoggedIn()) {
+    window.location.href = 'index.html';
   }
 }
 
@@ -139,7 +156,7 @@ window.RBAC = {
   checkPageAccess
 };
 
-// Auto‑run when DOM is ready (called from each page)
+// Auto‑run when DOM is ready – but we call from each page to be safe
 document.addEventListener('DOMContentLoaded', function() {
-  // We'll call init separately to avoid duplicate calls
+  // We'll rely on the page's explicit call to init
 });
