@@ -117,7 +117,7 @@
     if (remaining < 0) {
       container.className = 'remaining-balance invalid';
       remainingAmount.textContent = formatCurrency(Math.abs(remaining)) + ' (Overpayment)';
-      container.querySelector('.label').textContent = '⚠️ Overpayment Detected';
+      container.querySelector('.label').textContent = 'Note- Overpayment Detected';
       submitBtn.disabled = true;
       return;
     }
