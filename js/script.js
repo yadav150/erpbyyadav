@@ -39,8 +39,8 @@ function showToast(message, type = 'info') {
 
 // ============================================
 //  DATA SERVICE (FIREBASE REALTIME DATABASE)
-//  All CRUD operations now read/write to Firebase.
-//  No demo data – everything comes from the cloud.
+//  UPDATED: Added gender and status fields
+//  All CRUD operations now include gender and status.
 // ============================================
 
 const DataService = {
@@ -80,20 +80,32 @@ const DataService = {
     return this._fees.filter(f => f.studentId === studentId);
   },
 
-  // ---------- CREATE ----------
+  // ---------- CREATE (ADDED gender AND status) ----------
   async addStudent(student) {
     student.id = 's' + Date.now();
+    student.createdAt = Date.now();
+    // Add gender and status fields with defaults
+    student.gender = student.gender || '';
+    student.status = student.status || 'active';
     await firebase.database().ref('students/' + student.id).set(student);
     return student;
   },
-  async addFeeRecord(fee) {
-    fee.id = 'f' + Date.now();
-    await firebase.database().ref('fees/' + fee.id).set(fee);
-    return fee;
-  },
 
-  // ---------- UPDATE ----------
+  // ---------- UPDATE (PRESERVES gender AND status) ----------
   async updateStudent(updated) {
+    // Fetch existing student to preserve any missing fields
+    const existing = this.getStudentById(updated.id);
+    if (existing) {
+      // Preserve gender and status if not provided in update
+      updated.gender = updated.gender !== undefined ? updated.gender : (existing.gender || '');
+      updated.status = updated.status !== undefined ? updated.status : (existing.status || 'active');
+      // Preserve createdAt if not provided
+      updated.createdAt = updated.createdAt || existing.createdAt;
+    } else {
+      // If student doesn't exist locally, set defaults
+      updated.gender = updated.gender || '';
+      updated.status = updated.status || 'active';
+    }
     await firebase.database().ref('students/' + updated.id).update(updated);
     return updated;
   },
@@ -107,6 +119,13 @@ const DataService = {
     for (let fee of feesToRemove) {
       await firebase.database().ref('fees/' + fee.id).remove();
     }
+  },
+
+  // ---------- FEE RECORDS ----------
+  async addFeeRecord(fee) {
+    fee.id = 'f' + Date.now();
+    await firebase.database().ref('fees/' + fee.id).set(fee);
+    return fee;
   }
 };
 
