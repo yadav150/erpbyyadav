@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Salary – Morning Glory English Academy</title><link rel="stylesheet" href="css/style.css" /></head>
+<body>
+    <!-- SIDEBAR (active = salary) -->
+    <aside class="sidebar" id="sidebar"> <!-- copy, set active to salary --> </aside>
+    <div class="main-wrapper" id="mainWrapper">
+        <header class="top-header"><!-- same --></header>
+        <main class="page-content">
+            <div class="action-bar">
+                <div class="left">
+                    <select class="form-select" style="width:160px;"><option value="">All Months</option><option>January</option><option>February</option>... <option>December</option></select>
+                    <select class="form-select" style="width:160px;"><option value="">All Status</option><option>Paid</option><option>Unpaid</option></select>
+                </div>
+                <button class="btn-sm btn-primary">+ Generate Salary</button>
+            </div>
+            <div class="card">
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead><tr><th>Teacher</th><th>Month</th><th>Amount (₹)</th><th>Paid Date</th><th>Status</th></tr></thead>
+                        <tbody id="salaryTableBody"><tr class="empty-row"><td colspan="5">No salary records found.</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+        <footer class="site-footer"><!-- same --></footer>
+    </div>
+    <div class="sidebar-overlay"></div>
+    <script src="js/script.js"></script>
+</body>
+</html>
