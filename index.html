@@ -19,31 +19,31 @@
             <span class="brand-text">Morning Glory</span>
         </div>
         <nav class="sidebar-nav">
-            <a href="index.html" class="nav-link active" data-permission="view_dashboard">
+            <a href="index.html" class="nav-link active">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 10L10 2L18 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 8V16H16V8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="7" y="12" width="6" height="4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
                 <span>Dashboard</span>
             </a>
-            <a href="students.html" class="nav-link" data-permission="manage_students">
+            <a href="students.html" class="nav-link">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M3 17C3 14.2386 5.23858 12 8 12H12C14.7614 12 17 14.2386 17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
                 <span>Students</span>
             </a>
-            <a href="teachers.html" class="nav-link" data-permission="manage_teachers">
+            <a href="teachers.html" class="nav-link">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="6" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M3 16C3 13.2386 5.23858 11 8 11H12C14.7614 11 17 13.2386 17 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="8" y="14" width="4" height="4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
                 <span>Teachers</span>
             </a>
-            <a href="fees.html" class="nav-link" data-permission="manage_fees">
+            <a href="fees.html" class="nav-link">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
                 <span>Fees</span>
             </a>
-            <a href="salary.html" class="nav-link" data-permission="manage_salary">
+            <a href="salary.html" class="nav-link">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="5" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 9H13M7 13H11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
                 <span>Salary</span>
             </a>
-            <a href="reports.html" class="nav-link" data-permission="view_reports">
+            <a href="reports.html" class="nav-link">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="12" width="4" height="6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="8" y="8" width="4" height="10" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="14" y="4" width="4" height="14" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
                 <span>Reports</span>
             </a>
-            <a href="settings.html" class="nav-link" data-permission="manage_settings">
+            <a href="settings.html" class="nav-link">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M10 2V4M10 16V18M4 10H2M18 10H16M5.5 5.5L4 4M15.5 15.5L17 17M5.5 14.5L4 16M15.5 4.5L17 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
                 <span>Settings</span>
             </a>
@@ -66,7 +66,7 @@
                 <h1 class="page-title">Dashboard</h1>
             </div>
             <div class="header-right">
-                <span class="greeting">Welcome, Admin</span>
+                <span class="greeting" id="greetingText">Welcome, Admin</span>
                 <button id="logoutBtn" style="background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:6px;color:var(--gray-600);padding:4px 8px;border-radius:8px;transition:background 0.2s;" onmouseover="this.style.background='var(--gray-100)'" onmouseout="this.style.background='transparent'">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M8 2H3C1.89543 2 1 2.89543 1 4V16C1 17.1046 1.89543 18 3 18H8M13 14L17 10M17 10L13 6M17 10H8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     <span style="font-size:0.85rem;font-weight:500;">Logout</span>
@@ -77,9 +77,9 @@
             </div>
         </header>
 
-        <!-- PAGE CONTENT (unchanged except for RBAC optional hiding) -->
+        <!-- PAGE CONTENT -->
         <main class="page-content">
-            <!-- Stats (empty) -->
+            <!-- Stats -->
             <section class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-icon blue"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="5" stroke="currentColor" stroke-width="2"/><path d="M4 24C4 19.5817 7.58172 16 12 16H16C20.4183 16 24 19.5817 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
@@ -109,27 +109,27 @@
                 <div class="card quick-actions">
                     <div class="card-header"><h2>Quick Actions</h2></div>
                     <div class="quick-grid">
-                        <a href="students.html" class="quick-btn" data-permission="manage_students">
+                        <a href="students.html" class="quick-btn">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 8V16M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
                             <span>Add Student</span>
                         </a>
-                        <a href="teachers.html" class="quick-btn" data-permission="manage_teachers">
+                        <a href="teachers.html" class="quick-btn">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 8V16M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
                             <span>Add Teacher</span>
                         </a>
-                        <a href="fees.html" class="quick-btn" data-permission="manage_fees">
+                        <a href="fees.html" class="quick-btn">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
                             <span>Collect Fees</span>
                         </a>
-                        <a href="salary.html" class="quick-btn" data-permission="manage_salary">
+                        <a href="salary.html" class="quick-btn">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="6" width="16" height="13" rx="2" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 10H16M8 14H12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
                             <span>Pay Salary</span>
                         </a>
-                        <a href="reports.html" class="quick-btn" data-permission="view_reports">
+                        <a href="reports.html" class="quick-btn">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="14" width="4" height="7" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><rect x="10" y="9" width="4" height="12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><rect x="17" y="4" width="4" height="17" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
                             <span>View Reports</span>
                         </a>
-                        <a href="settings.html" class="quick-btn" data-permission="manage_settings">
+                        <a href="settings.html" class="quick-btn">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M12 3V5M12 19V21M5 12H3M21 12H19M6.5 6.5L5 5M18.5 18.5L20 20M6.5 17.5L5 19M18.5 5.5L20 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
                             <span>Settings</span>
                         </a>
@@ -170,7 +170,7 @@
 
     <div class="sidebar-overlay"></div>
 
-    <!-- RBAC & Firebase -->
+    <!-- Firebase & Authentication (no RBAC) -->
     <script type="importmap">
         {
             "imports": {
@@ -181,12 +181,31 @@
         }
     </script>
     <script type="module" src="js/firebase-init.js"></script>
-    <script type="module" src="js/rbac.js"></script>
     <script type="module">
-        document.addEventListener('DOMContentLoaded', function() {
-            window.RBAC.init();
-            const logoutBtn = document.getElementById('logoutBtn');
-            if (logoutBtn) logoutBtn.addEventListener('click', window.RBAC.logout);
+        // Auth guard and logout (no RBAC)
+        import { auth } from './js/firebase-init.js';
+        import { onAuthStateChanged, signOut } from 'firebase/auth';
+
+        // Set up logout button
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => {
+                signOut(auth).then(() => {
+                    window.location.href = 'login.html';
+                });
+            });
+        }
+
+        // Auth state listener: redirect to login if not authenticated
+        onAuthStateChanged(auth, (user) => {
+            if (!user && window.location.pathname.indexOf('login.html') === -1) {
+                window.location.href = 'login.html';
+            }
+            if (user) {
+                // Update greeting with email if needed
+                const greeting = document.getElementById('greetingText');
+                if (greeting) greeting.textContent = `Welcome, ${user.displayName || user.email || 'User'}`;
+            }
         });
     </script>
     <script src="js/script.js"></script>
