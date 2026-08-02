@@ -1,11 +1,8 @@
 // ============================================
-//  STUDENTS PAGE LOGIC
+//  STUDENTS PAGE LOGIC (Firebase Ready)
 // ============================================
 
-let students = DataService.getStudents();
-let currentFiltered = [...students];
-
-// Helper: class order for sorting
+// Helper: class order for sorting (Nursery → LKG → UKG → 1 → 2 → ... → 8)
 function getClassOrder(cls) {
   const order = { 'Nursery': 0, 'LKG': 1, 'UKG': 2 };
   const num = parseInt(cls);
@@ -44,13 +41,14 @@ function filterStudents() {
   const cls = document.getElementById('classFilter').value;
   const sort = document.getElementById('sortBy').value;
 
+  const students = DataService.getStudents();
+
   let filtered = students.filter(s => {
     const matchSearch = s.name.toLowerCase().includes(search) || s.class.toLowerCase().includes(search);
     const matchClass = cls === '' || s.class === cls;
     return matchSearch && matchClass;
   });
 
-  // Sort with custom logic for Nursery–8
   filtered.sort((a, b) => {
     if (sort === 'name') return a.name.localeCompare(b.name);
     if (sort === 'class') return getClassOrder(a.class) - getClassOrder(b.class);
@@ -58,7 +56,6 @@ function filterStudents() {
     return 0;
   });
 
-  currentFiltered = filtered;
   renderStudents(filtered);
 }
 
@@ -70,7 +67,7 @@ function clearFilters() {
 }
 
 // Add/Edit form handling
-document.getElementById('studentForm').addEventListener('submit', function(e) {
+document.getElementById('studentForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   const id = document.getElementById('editStudentId').value;
   const name = document.getElementById('studentName').value.trim();
@@ -87,20 +84,17 @@ document.getElementById('studentForm').addEventListener('submit', function(e) {
   const studentData = { name, class: cls, section, rollNo, email, phone, address };
 
   if (id) {
-    const updated = { ...studentData, id };
-    DataService.updateStudent(updated);
-    students = DataService.getStudents();
+    await DataService.updateStudent({ ...studentData, id });
     showToast('Student updated!', 'success');
   } else {
-    DataService.addStudent(studentData);
-    students = DataService.getStudents();
+    await DataService.addStudent(studentData);
     showToast('Student added!', 'success');
   }
 
   closeModal('addStudentModal');
   this.reset();
   document.getElementById('editStudentId').value = '';
-  filterStudents();
+  // No need to call filterStudents() – the 'dataChanged' event will trigger it automatically
 });
 
 function editStudent(id) {
@@ -119,12 +113,11 @@ function editStudent(id) {
   openModal('addStudentModal');
 }
 
-function deleteStudent(id) {
+async function deleteStudent(id) {
   if (confirm('Delete this student and all related fees?')) {
-    DataService.deleteStudent(id);
-    students = DataService.getStudents();
-    filterStudents();
+    await DataService.deleteStudent(id);
     showToast('Student deleted', 'info');
+    // The 'dataChanged' event will automatically refresh the list
   }
 }
 
@@ -139,5 +132,13 @@ document.getElementById('addStudentModal').addEventListener('click', function(e)
   }
 });
 
+// Listen for data changes from Firebase and re-filter
+window.addEventListener('dataChanged', function() {
+  filterStudents();
+});
+
 // Initial render
-document.addEventListener('DOMContentLoaded', filterStudents);
+document.addEventListener('DOMContentLoaded', function() {
+  // Small delay to let Firebase load first
+  setTimeout(filterStudents, 200);
+});
