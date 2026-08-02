@@ -3,107 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard · School ERP</title>
+  <title>Fees · School ERP</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/fees.css">
 </head>
 <body>
+  <!-- ========== NAVBAR ========== -->
   <nav class="navbar">
     <div class="container">
       <span class="brand">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6V4M8 6V4M16 6V4M4 6h16v14H4z"/><path d="M8 10h8M8 14h6"/></svg>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 6V4M8 6V4M16 6V4M4 6h16v14H4z"/>
+          <path d="M8 10h8M8 14h6"/>
+        </svg>
         School ERP
       </span>
       <div class="nav-links">
-        <a href="index.html" class="active">Dashboard</a>
+        <a href="index.html">Dashboard</a>
         <a href="students.html">Students</a>
-        <a href="fees.html">Fees</a>
+        <a href="fees.html" class="active">Fees</a>
       </div>
     </div>
   </nav>
 
+  <!-- ========== MAIN CONTENT ========== -->
   <main class="container" style="padding-top: 32px;">
-    <h1 style="margin-bottom: 24px; font-weight: 600;">Dashboard</h1>
+    <h1 style="margin-bottom: 24px; font-weight: 600;">Fee Management</h1>
 
-    <!-- Stats Cards (4 wide) -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-bottom: 32px;">
+    <!-- Summary Cards -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px; margin-bottom: 32px;">
       <div class="card" style="text-align: center; padding: 20px;">
-        <div style="font-size: 2.2rem; font-weight: 700; color: var(--primary-dark);" id="totalStudents">0</div>
-        <div style="color: var(--text-muted);">Total Students</div>
+        <div style="font-size: 1.8rem; font-weight: 700; color: var(--accent-color);" id="totalCollected">₹0</div>
+        <div style="color: var(--text-muted);">Total Collected</div>
       </div>
       <div class="card" style="text-align: center; padding: 20px;">
-        <div style="font-size: 2.2rem; font-weight: 700; color: var(--accent-color);" id="totalFeesCollected">₹0</div>
-        <div style="color: var(--text-muted);">Fees Collected</div>
+        <div style="font-size: 1.8rem; font-weight: 700; color: #e11d48;" id="totalPending">₹0</div>
+        <div style="color: var(--text-muted);">Total Pending</div>
       </div>
       <div class="card" style="text-align: center; padding: 20px;">
-        <div style="font-size: 2.2rem; font-weight: 700; color: #e11d48;" id="pendingFees">₹0</div>
-        <div style="color: var(--text-muted);">Pending Fees</div>
-      </div>
-      <div class="card" style="text-align: center; padding: 20px;">
-        <div style="font-size: 2.2rem; font-weight: 700; color: #d97706;" id="pendingCount">0</div>
-        <div style="color: var(--text-muted);">Pending Students</div>
+        <div style="font-size: 1.8rem; font-weight: 700; color: #d97706;" id="studentsWithPending">0</div>
+        <div style="color: var(--text-muted);">Students with Pending</div>
       </div>
     </div>
 
-    <!-- Recent Students -->
+    <!-- Record Payment -->
     <div class="card">
-      <div class="card-header">Recent Students</div>
-      <div class="table-responsive">
-        <table>
-          <thead><tr><th>Name</th><th>Class</th><th>Section</th><th>Roll No</th></tr></thead>
-          <tbody id="recentStudentsTable">
-            <tr><td colspan="4" style="text-align:center; color:var(--text-muted);">No students added yet.</td></tr>
-          </tbody>
-        </table>
+      <div class="card-header">Record Payment</div>
+      <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: end;">
+        <div class="form-group" style="flex:2; min-width:200px;">
+          <label>Student</label>
+          <select id="feeStudentSelect"></select>
+        </div>
+        <div class="form-group" style="flex:1; min-width:150px;">
+          <label>Amount (₹)</label>
+          <input type="number" id="feeAmount" placeholder="e.g. 5000" min="0" step="100">
+        </div>
+        <div class="form-group" style="flex:0;">
+          <button class="btn btn-success" onclick="recordPayment()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Pay & Generate Receipt
+          </button>
+        </div>
+      </div>
+      <div style="margin-top: 12px; font-size: 14px; color: var(--text-muted); min-height: 24px;" id="selectedStudentInfo">
+        <!-- Will show selected student's fee summary -->
       </div>
     </div>
 
-    <!-- Recent Fees -->
+    <!-- Fee History -->
     <div class="card">
-      <div class="card-header">Recent Fee Payments</div>
+      <div class="card-header">Fee History</div>
       <div class="table-responsive">
         <table>
-          <thead><tr><th>Student</th><th>Amount</th><th>Date</th><th>Receipt</th></tr></thead>
-          <tbody id="recentFeesTable">
-            <tr><td colspan="4" style="text-align:center; color:var(--text-muted);">No fee records found.</td></tr>
+          <thead>
+            <tr><th>Student</th><th>Amount</th><th>Date</th><th>Receipt No</th><th>Status</th></tr>
+          </thead>
+          <tbody id="feeHistoryTable">
+            <tr>
+              <td colspan="5" style="text-align:center; color:var(--text-muted); padding: 40px 0;">
+                No fee records found.
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
     </div>
   </main>
 
+  <!-- ========== RECEIPT MODAL ========== -->
+  <div class="modal-overlay" id="receiptModal">
+    <div class="modal" style="max-width: 700px;">
+      <div class="modal-header">
+        <h3>Payment Receipt</h3>
+        <button class="modal-close" onclick="closeModal('receiptModal')">&times;</button>
+      </div>
+      <div id="receiptContent">
+        <!-- dynamically filled by JS -->
+      </div>
+      <div style="display: flex; gap: 12px; justify-content: end; margin-top: 20px;">
+        <button class="btn btn-primary btn-print" onclick="window.print()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 6 2 18 2 18 9"/>
+            <path d="M18 9H6"/>
+            <rect x="6" y="14" width="12" height="8"/>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2"/>
+          </svg>
+          Print / PDF
+        </button>
+        <button class="btn btn-outline-secondary" onclick="closeModal('receiptModal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== FOOTER ========== -->
   <footer class="footer">
     <div class="container">Yadav Web technologies</div>
   </footer>
 
   <script src="js/script.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const students = DataService.getStudents();
-      const fees = DataService.getAllFees();
-
-      document.getElementById('totalStudents').textContent = students.length;
-      const totalCollected = fees.filter(f => f.status === 'paid').reduce((sum, f) => sum + f.amount, 0);
-      document.getElementById('totalFeesCollected').textContent = formatCurrency(totalCollected);
-      const pending = fees.filter(f => f.status === 'pending').reduce((sum, f) => sum + f.amount, 0);
-      document.getElementById('pendingFees').textContent = formatCurrency(pending);
-      const pendingCount = new Set(fees.filter(f => f.status === 'pending').map(f => f.studentId)).size;
-      document.getElementById('pendingCount').textContent = pendingCount;
-
-      if (students.length > 0) {
-        const recentStudents = students.slice(-5).reverse();
-        document.getElementById('recentStudentsTable').innerHTML = recentStudents.map(s => `
-          <tr><td>${s.name}</td><td>${s.class}</td><td>${s.section}</td><td>${s.rollNo}</td></tr>
-        `).join('');
-      }
-
-      if (fees.length > 0) {
-        const recentFees = fees.slice(-5).reverse();
-        document.getElementById('recentFeesTable').innerHTML = recentFees.map(f => {
-          const student = DataService.getStudentById(f.studentId);
-          return `<tr><td>${student ? student.name : 'Unknown'}</td><td>${formatCurrency(f.amount)}</td><td>${f.paidDate || '—'}</td><td>${f.receiptNo || '—'}</td></tr>`;
-        }).join('');
-      }
-    });
-  </script>
+  <script src="js/fees.js"></script>
 </body>
 </html>
