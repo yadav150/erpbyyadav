@@ -1,0 +1,7 @@
+/* Only styles unique to students.html */
+#studentsTableBody tr td:last-child {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
