@@ -3,176 +3,127 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login – Morning Glory English Academy</title>
+    <title>Teachers – Morning Glory English Academy</title>
     <link rel="stylesheet" href="css/style.css" />
-    <style>
-        /* Login specific – no CLS, fixed dimensions */
-        .login-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: var(--gray-50);
-            padding: 20px;
-            margin: 0;
-        }
-        .login-card {
-            background: #ffffff;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-md);
-            padding: 40px 32px;
-            max-width: 420px;
-            width: 100%;
-            border: 1px solid var(--gray-200);
-            /* Fixed height to prevent CLS */
-            min-height: 480px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            transition: none;
-        }
-        .login-card .brand-icon {
-            display: block;
-            margin: 0 auto 16px;
-            width: 60px;
-            height: 60px;
-        }
-        .login-card h1 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--gray-900);
-            margin-bottom: 4px;
-            text-align: center;
-        }
-        .login-card .sub {
-            text-align: center;
-            color: var(--gray-500);
-            margin-bottom: 28px;
-            font-size: 0.95rem;
-        }
-        .login-card .form-group {
-            margin-bottom: 20px;
-        }
-        .login-card .form-group label {
-            display: block;
-            font-weight: 500;
-            font-size: 0.85rem;
-            color: var(--gray-700);
-            margin-bottom: 4px;
-        }
-        .login-card .form-group input {
-            width: 100%;
-            padding: 10px 14px;
-            border: 1px solid var(--gray-300);
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border 0.2s, box-shadow 0.2s;
-            box-sizing: border-box;
-        }
-        .login-card .form-group input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(79,70,229,0.15);
-            outline: none;
-        }
-        .login-card .btn-login {
-            width: 100%;
-            padding: 12px;
-            background: var(--primary);
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            min-height: 48px;
-        }
-        .login-card .btn-login:hover {
-            background: var(--primary-dark);
-        }
-        .login-card .btn-login:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-        .login-card .error-msg {
-            color: var(--danger);
-            font-size: 0.9rem;
-            margin-top: 12px;
-            text-align: center;
-            min-height: 24px;
-        }
-        .login-card .footer-text {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 0.8rem;
-            color: var(--gray-400);
-        }
-        /* Spinner SVG inside button */
-        .spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: #ffffff;
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        .hidden { display: none; }
-
-        /* Responsive */
-        @media (max-width: 480px) {
-            .login-card {
-                padding: 28px 20px;
-                min-height: 440px;
-            }
-            .login-card h1 { font-size: 1.3rem; }
-        }
-    </style>
 </head>
 <body>
 
-    <div class="login-wrapper">
-        <div class="login-card">
-            <!-- Logo SVG (consistent with ERP) -->
-            <svg class="brand-icon" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="2" y="2" width="56" height="56" rx="14" stroke="#4F46E5" stroke-width="4" />
-                <path d="M16 44V16H30C34 16 38 18.5 38 22C38 25.5 34 28 30 28H22M36 44L30 28H22L16 44" stroke="#4F46E5" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M44 28V44M44 28H38M44 28H50" stroke="#4F46E5" stroke-width="3.5" stroke-linecap="round" />
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="32" height="32" rx="8" stroke="#4F46E5" stroke-width="3" />
+                <path d="M10 26V10H18C20.5 10 22.5 11.5 22.5 14C22.5 16.5 20.5 18 18 18H14M22 26L18 18H14L10 26" stroke="#4F46E5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M26 18V26M26 18H22M26 18H30" stroke="#4F46E5" stroke-width="2.5" stroke-linecap="round" />
             </svg>
-
-            <h1>Morning Glory</h1>
-            <p class="sub">Sign in to your account</p>
-
-            <form id="loginForm" autocomplete="off">
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="admin@school.edu" required />
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="••••••••" required />
-                </div>
-                <button type="submit" class="btn-login" id="loginBtn">
-                    <span id="btnText">Sign In</span>
-                    <span class="spinner hidden" id="btnSpinner"></span>
-                </button>
-                <div id="loginError" class="error-msg"></div>
-            </form>
-
-            <div class="footer-text">
-                &copy; 2026 Morning Glory English Academy
-            </div>
+            <span class="brand-text">Morning Glory</span>
         </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-link" data-permission="view_dashboard">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 10L10 2L18 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 8V16H16V8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="7" y="12" width="6" height="4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="students.html" class="nav-link" data-permission="manage_students">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M3 17C3 14.2386 5.23858 12 8 12H12C14.7614 12 17 14.2386 17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <span>Students</span>
+            </a>
+            <a href="teachers.html" class="nav-link active" data-permission="manage_teachers">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="6" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M3 16C3 13.2386 5.23858 11 8 11H12C14.7614 11 17 13.2386 17 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="8" y="14" width="4" height="4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                <span>Teachers</span>
+            </a>
+            <a href="fees.html" class="nav-link" data-permission="manage_fees">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <span>Fees</span>
+            </a>
+            <a href="salary.html" class="nav-link" data-permission="manage_salary">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="5" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 9H13M7 13H11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <span>Salary</span>
+            </a>
+            <a href="reports.html" class="nav-link" data-permission="view_reports">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="12" width="4" height="6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="8" y="8" width="4" height="10" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="14" y="4" width="4" height="14" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                <span>Reports</span>
+            </a>
+            <a href="settings.html" class="nav-link" data-permission="manage_settings">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M10 2V4M10 16V18M4 10H2M18 10H16M5.5 5.5L4 4M15.5 15.5L17 17M5.5 14.5L4 16M15.5 4.5L17 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <span>Settings</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <span class="version">v2.0</span>
+            <span class="school-name">Morning Glory English Academy</span>
+        </div>
+    </aside>
+
+    <!-- ===== MAIN WRAPPER ===== -->
+    <div class="main-wrapper" id="mainWrapper">
+
+        <!-- ===== HEADER (with Hamburger & Logout) ===== -->
+        <header class="top-header">
+            <div class="header-left">
+                <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6H21M3 12H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </button>
+                <h1 class="page-title">Teachers</h1>
+            </div>
+            <div class="header-right">
+                <span class="greeting">Welcome, Admin</span>
+                <button id="logoutBtn" style="background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:6px;color:var(--gray-600);padding:4px 8px;border-radius:8px;transition:background 0.2s;" onmouseover="this.style.background='var(--gray-100)'" onmouseout="this.style.background='transparent'">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M8 2H3C1.89543 2 1 2.89543 1 4V16C1 17.1046 1.89543 18 3 18H8M13 14L17 10M17 10L13 6M17 10H8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span style="font-size:0.85rem;font-weight:500;">Logout</span>
+                </button>
+                <div class="avatar">
+                    <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="#E5E7EB" stroke-width="2"/><circle cx="18" cy="13" r="5" stroke="#E5E7EB" stroke-width="2"/><path d="M6 29C6 24.0294 10.0294 20 15 20H21C25.9706 20 30 24.0294 30 29" stroke="#E5E7EB" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+            </div>
+        </header>
+
+        <!-- ===== PAGE CONTENT ===== -->
+        <main class="page-content">
+            <div class="action-bar">
+                <div class="left">
+                    <input type="text" class="form-input" placeholder="Search teacher..." style="width:260px;" />
+                    <select class="form-select" style="width:160px;">
+                        <option value="">All Subjects</option>
+                        <option>Mathematics</option><option>Science</option><option>English</option>
+                        <option>Hindi</option><option>Social Studies</option><option>Computer</option>
+                    </select>
+                </div>
+                <button class="btn-sm btn-primary">+ Add Teacher</button>
+            </div>
+
+            <div class="card">
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Subject</th>
+                                <th>Qualification</th>
+                                <th>Contact</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="teachersTableBody">
+                            <tr class="empty-row"><td colspan="6">No teachers added yet.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="site-footer">
+            <div class="footer-content">
+                <span>&copy; 2026 <strong>Morning Glory English Academy</strong></span>
+                <span>Developed by <strong>Yadab Web Technologies</strong></span>
+            </div>
+        </footer>
     </div>
 
-    <!-- Firebase & RBAC (for login) -->
+    <div class="sidebar-overlay"></div>
+
+    <!-- ===== RBAC & FIREBASE SCRIPTS ===== -->
     <script type="importmap">
         {
             "imports": {
@@ -182,46 +133,14 @@
             }
         }
     </script>
+    <script type="module" src="js/firebase-init.js"></script>
+    <script type="module" src="js/rbac.js"></script>
     <script type="module">
-        import { auth } from './js/firebase-init.js';
-        import { signInWithEmailAndPassword } from 'firebase/auth';
-
-        const form = document.getElementById('loginForm');
-        const email = document.getElementById('email');
-        const password = document.getElementById('password');
-        const loginBtn = document.getElementById('loginBtn');
-        const btnText = document.getElementById('btnText');
-        const btnSpinner = document.getElementById('btnSpinner');
-        const errorDiv = document.getElementById('loginError');
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            errorDiv.textContent = '';
-            // Disable button and show spinner
-            loginBtn.disabled = true;
-            btnText.textContent = 'Signing in...';
-            btnSpinner.classList.remove('hidden');
-
-            try {
-                await signInWithEmailAndPassword(auth, email.value.trim(), password.value);
-                // Redirect will happen after auth state changes in rbac
-                // but we can also redirect immediately after success
-                window.location.href = 'index.html';
-            } catch (err) {
-                errorDiv.textContent = err.message || 'Login failed. Please check your credentials.';
-                // Re-enable button
-                loginBtn.disabled = false;
-                btnText.textContent = 'Sign In';
-                btnSpinner.classList.add('hidden');
-            }
-        });
-
-        // Reset button state if user navigates back (optional)
-        window.addEventListener('pageshow', () => {
-            loginBtn.disabled = false;
-            btnText.textContent = 'Sign In';
-            btnSpinner.classList.add('hidden');
+        document.addEventListener('DOMContentLoaded', function() {
+            window.RBAC.init();
+            document.getElementById('logoutBtn').addEventListener('click', window.RBAC.logout);
         });
     </script>
+    <script src="js/script.js"></script>
 </body>
 </html>
