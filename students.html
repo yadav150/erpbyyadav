@@ -1,84 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Students – Morning Glory English Academy</title>
-    <link rel="stylesheet" href="css/style.css" />
-</head>
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Students – Morning Glory English Academy</title><link rel="stylesheet" href="css/style.css" /></head>
 <body>
-    <!-- SIDEBAR (copy exact same as index.html) -->
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-brand">
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="2" y="2" width="32" height="32" rx="8" stroke="#4F46E5" stroke-width="3" />
-                <path d="M10 26V10H18C20.5 10 22.5 11.5 22.5 14C22.5 16.5 20.5 18 18 18H14M22 26L18 18H14L10 26" stroke="#4F46E5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M26 18V26M26 18H22M26 18H30" stroke="#4F46E5" stroke-width="2.5" stroke-linecap="round" />
-            </svg>
-            <span class="brand-text">Morning Glory</span>
+<!-- === SIDEBAR (same as index, active="students") === -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="32" height="32" rx="8" stroke="#4F46E5" stroke-width="3" /><path d="M10 26V10H18C20.5 10 22.5 11.5 22.5 14C22.5 16.5 20.5 18 18 18H14M22 26L18 18H14L10 26" stroke="#4F46E5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /><path d="M26 18V26M26 18H22M26 18H30" stroke="#4F46E5" stroke-width="2.5" stroke-linecap="round" /></svg><span class="brand-text">Morning Glory</span></div>
+    <nav class="sidebar-nav">
+        <a href="index.html" class="nav-link" data-permission="view_dashboard"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 10L10 2L18 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 8V16H16V8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="7" y="12" width="6" height="4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Dashboard</span></a>
+        <a href="students.html" class="nav-link active" data-permission="manage_students"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M3 17C3 14.2386 5.23858 12 8 12H12C14.7614 12 17 14.2386 17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Students</span></a>
+        <a href="teachers.html" class="nav-link" data-permission="manage_teachers"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="6" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M3 16C3 13.2386 5.23858 11 8 11H12C14.7614 11 17 13.2386 17 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="8" y="14" width="4" height="4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Teachers</span></a>
+        <a href="fees.html" class="nav-link" data-permission="manage_fees"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Fees</span></a>
+        <a href="salary.html" class="nav-link" data-permission="manage_salary"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="5" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 9H13M7 13H11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Salary</span></a>
+        <a href="reports.html" class="nav-link" data-permission="view_reports"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="12" width="4" height="6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="8" y="8" width="4" height="10" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="14" y="4" width="4" height="14" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Reports</span></a>
+        <a href="settings.html" class="nav-link" data-permission="manage_settings"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M10 2V4M10 16V18M4 10H2M18 10H16M5.5 5.5L4 4M15.5 15.5L17 17M5.5 14.5L4 16M15.5 4.5L17 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Settings</span></a>
+    </nav>
+    <div class="sidebar-footer"><span class="version">v2.0</span><span class="school-name">Morning Glory English Academy</span></div>
+</aside>
+
+<div class="main-wrapper" id="mainWrapper">
+    <header class="top-header">
+        <div class="header-left">
+            <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6H21M3 12H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+            <h1 class="page-title">Students</h1>
         </div>
-        <nav class="sidebar-nav">
-            <a href="index.html" class="nav-link"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 10L10 2L18 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 8V16H16V8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="7" y="12" width="6" height="4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Dashboard</span></a>
-            <a href="students.html" class="nav-link active"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M3 17C3 14.2386 5.23858 12 8 12H12C14.7614 12 17 14.2386 17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Students</span></a>
-            <a href="teachers.html" class="nav-link"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="6" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M3 16C3 13.2386 5.23858 11 8 11H12C14.7614 11 17 13.2386 17 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="8" y="14" width="4" height="4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Teachers</span></a>
-            <a href="fees.html" class="nav-link"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Fees</span></a>
-            <a href="salary.html" class="nav-link"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="5" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 9H13M7 13H11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Salary</span></a>
-            <a href="reports.html" class="nav-link"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="12" width="4" height="6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="8" y="8" width="4" height="10" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="14" y="4" width="4" height="14" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Reports</span></a>
-            <a href="settings.html" class="nav-link"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M10 2V4M10 16V18M4 10H2M18 10H16M5.5 5.5L4 4M15.5 15.5L17 17M5.5 14.5L4 16M15.5 4.5L17 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Settings</span></a>
-        </nav>
-        <div class="sidebar-footer"><span class="version">v2.0</span><span class="school-name">Morning Glory English Academy</span></div>
-    </aside>
+        <div class="header-right">
+            <span class="greeting">Welcome, Admin</span>
+            <button id="logoutBtn" style="background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:6px;color:var(--gray-600);padding:4px 8px;border-radius:8px;transition:background 0.2s;" onmouseover="this.style.background='var(--gray-100)'" onmouseout="this.style.background='transparent'">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M8 2H3C1.89543 2 1 2.89543 1 4V16C1 17.1046 1.89543 18 3 18H8M13 14L17 10M17 10L13 6M17 10H8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span style="font-size:0.85rem;font-weight:500;">Logout</span>
+            </button>
+            <div class="avatar"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="#E5E7EB" stroke-width="2"/><circle cx="18" cy="13" r="5" stroke="#E5E7EB" stroke-width="2"/><path d="M6 29C6 24.0294 10.0294 20 15 20H21C25.9706 20 30 24.0294 30 29" stroke="#E5E7EB" stroke-width="2" stroke-linecap="round"/></svg></div>
+        </div>
+    </header>
 
-    <div class="main-wrapper" id="mainWrapper">
-        <header class="top-header">
-            <div class="header-left">
-                <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6H21M3 12H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-                <h1 class="page-title">Students</h1>
+    <main class="page-content">
+        <div class="action-bar">
+            <div class="left">
+                <input type="text" class="form-input" placeholder="Search by name or ID..." style="width:260px;" />
+                <select class="form-select" style="width:160px;">
+                    <option value="">All Classes</option>
+                    <option value="1">Class 1</option><option value="2">Class 2</option><option value="3">Class 3</option>
+                    <option value="4">Class 4</option><option value="5">Class 5</option><option value="6">Class 6</option>
+                    <option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option>
+                    <option value="10">Class 10</option><option value="11">Class 11</option><option value="12">Class 12</option>
+                </select>
             </div>
-            <div class="header-right"><span class="greeting">Welcome, Admin</span><div class="avatar"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="#E5E7EB" stroke-width="2"/><circle cx="18" cy="13" r="5" stroke="#E5E7EB" stroke-width="2"/><path d="M6 29C6 24.0294 10.0294 20 15 20H21C25.9706 20 30 24.0294 30 29" stroke="#E5E7EB" stroke-width="2" stroke-linecap="round"/></svg></div></div>
-        </header>
-
-        <main class="page-content">
-            <div class="action-bar">
-                <div class="left">
-                    <input type="text" class="form-input" placeholder="Search by name or ID..." style="width:260px;" />
-                    <select class="form-select" style="width:160px;">
-                        <option value="">All Classes</option>
-                        <option value="1">Class 1</option><option value="2">Class 2</option><option value="3">Class 3</option>
-                        <option value="4">Class 4</option><option value="5">Class 5</option><option value="6">Class 6</option>
-                        <option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option>
-                        <option value="10">Class 10</option><option value="11">Class 11</option><option value="12">Class 12</option>
-                    </select>
-                </div>
-                <button class="btn-sm btn-primary">+ Add Student</button>
+            <button class="btn-sm btn-primary">+ Add Student</button>
+        </div>
+        <div class="card">
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead><tr><th>Roll No</th><th>Name</th><th>Class</th><th>Guardian</th><th>Contact</th><th>Status</th></tr></thead>
+                    <tbody id="studentsTableBody"><tr class="empty-row"><td colspan="6">No students enrolled yet.</td></tr></tbody>
+                </table>
             </div>
+        </div>
+    </main>
 
-            <div class="card">
-                <div class="table-responsive">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Roll No</th>
-                                <th>Name</th>
-                                <th>Class</th>
-                                <th>Guardian</th>
-                                <th>Contact</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="studentsTableBody">
-                            <tr class="empty-row"><td colspan="6">No students enrolled yet.</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </main>
+    <footer class="site-footer">
+        <div class="footer-content"><span>&copy; 2026 <strong>Morning Glory English Academy</strong></span><span>Developed by <strong>Yadab Web Technologies</strong></span></div>
+    </footer>
+</div>
+<div class="sidebar-overlay"></div>
 
-        <footer class="site-footer">
-            <div class="footer-content"><span>&copy; 2026 <strong>Morning Glory English Academy</strong></span><span>Developed by <strong>Yadab Web Technologies</strong></span></div>
-        </footer>
-    </div>
-    <div class="sidebar-overlay"></div>
-    <script src="js/script.js"></script>
+<!-- RBAC -->
+<script type="importmap">{"imports":{"firebase/app":"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js","firebase/auth":"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js","firebase/database":"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"}}</script>
+<script type="module" src="js/firebase-init.js"></script>
+<script type="module" src="js/rbac.js"></script>
+<script type="module">
+    document.addEventListener('DOMContentLoaded', function() {
+        window.RBAC.init();
+        document.getElementById('logoutBtn').addEventListener('click', window.RBAC.logout);
+    });
+</script>
+<script src="js/script.js"></script>
 </body>
 </html>
