@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Teachers – Morning Glory English Academy</title><link rel="stylesheet" href="css/style.css" /></head>
+<body>
+    <!-- SIDEBAR (same structure as students.html, active link changed) -->
+    <aside class="sidebar" id="sidebar"> <!-- copy exact sidebar from students.html, change active to teachers --> </aside>
+    <div class="main-wrapper" id="mainWrapper">
+        <header class="top-header"><!-- same header --></header>
+        <main class="page-content">
+            <div class="action-bar">
+                <div class="left">
+                    <input type="text" class="form-input" placeholder="Search teacher..." style="width:260px;" />
+                    <select class="form-select" style="width:160px;"><option value="">All Subjects</option><option>Mathematics</option><option>Science</option><option>English</option><option>Hindi</option><option>Social Studies</option><option>Computer</option></select>
+                </div>
+                <button class="btn-sm btn-primary">+ Add Teacher</button>
+            </div>
+            <div class="card">
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead><tr><th>ID</th><th>Name</th><th>Subject</th><th>Qualification</th><th>Contact</th><th>Status</th></tr></thead>
+                        <tbody id="teachersTableBody"><tr class="empty-row"><td colspan="6">No teachers added yet.</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+        <footer class="site-footer"><div class="footer-content"><span>&copy; 2026 <strong>Morning Glory English Academy</strong></span><span>Developed by <strong>Yadab Web Technologies</strong></span></div></footer>
+    </div>
+    <div class="sidebar-overlay"></div>
+    <script src="js/script.js"></script>
+</body>
+</html>
