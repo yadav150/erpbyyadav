@@ -1,15 +1,16 @@
 /* ============================================
    ADVANCED STUDENT MANAGEMENT STYLES
+   Refined layout - consistent, compact, professional
    Does NOT modify existing styles.css
    ============================================ */
 
-/* ---- Toolbar ---- */
+/* ---- Main Toolbar ---- */
 .student-toolbar {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 12px;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
 
 .student-toolbar .toolbar-left {
@@ -23,20 +24,22 @@
 .student-toolbar .toolbar-right {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
   align-items: center;
+  margin-left: auto;
 }
 
+/* ---- Search ---- */
 .student-toolbar .search-wrapper {
   position: relative;
+  min-width: 220px;
+  max-width: 300px;
   flex: 1;
-  min-width: 200px;
-  max-width: 320px;
 }
 
 .student-toolbar .search-wrapper svg {
   position: absolute;
-  left: 12px;
+  left: 11px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-muted);
@@ -45,69 +48,82 @@
 
 .student-toolbar .search-wrapper input {
   width: 100%;
-  padding: 10px 12px 10px 36px;
+  padding: 8px 12px 8px 34px;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   font-size: 14px;
   background: #fff;
+  height: 38px;
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 
 .student-toolbar .search-wrapper input:focus {
   border-color: var(--accent-color);
   outline: 0;
-  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.12);
 }
 
-/* ---- Filter Dropdowns ---- */
+/* ---- Filter Group (Horizontal) ---- */
 .filter-group {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
 }
 
 .filter-group select {
-  padding: 8px 12px;
+  padding: 6px 10px;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   font-size: 13px;
   background: #fff;
   cursor: pointer;
-  min-width: 120px;
+  height: 38px;
+  min-width: 110px;
   transition: border-color var(--transition);
+  appearance: auto;
 }
 
 .filter-group select:focus {
   border-color: var(--accent-color);
   outline: 0;
-  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.12);
 }
 
-.filter-group .filter-label {
-  font-size: 12px;
-  color: var(--text-muted);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
+/* ---- Toolbar Buttons ---- */
+.toolbar-btn {
+  height: 38px;
+  padding: 0 16px;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
 }
 
-/* ---- Table Stats ---- */
+.toolbar-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ---- Table Stats Bar ---- */
 .table-stats {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 0 12px 0;
+  padding: 10px 0 12px 0;
   font-size: 14px;
   color: var(--text-muted);
   border-bottom: 1px solid var(--border-color);
+  margin-top: 4px;
 }
 
 .table-stats .stats-left {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .table-stats .stats-left strong {
@@ -126,12 +142,20 @@
   border-radius: var(--border-radius);
   font-size: 13px;
   background: #fff;
+  height: 34px;
+  cursor: pointer;
+}
+
+.table-stats .stats-right select:focus {
+  border-color: var(--accent-color);
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.12);
 }
 
 /* ---- Advanced Table ---- */
 .advanced-table-wrap {
   overflow-x: auto;
-  margin-top: 0;
+  margin: 0;
 }
 
 .advanced-table {
@@ -145,7 +169,7 @@
 }
 
 .advanced-table th {
-  padding: 12px 14px;
+  padding: 10px 14px;
   text-align: left;
   font-weight: 600;
   color: var(--primary-color);
@@ -157,12 +181,13 @@
   top: 0;
   background: #f1f5f9;
   z-index: 2;
+  font-size: 13px;
 }
 
 .advanced-table th .sort-icon {
   display: inline-block;
   margin-left: 4px;
-  opacity: 0.4;
+  opacity: 0.3;
   transition: opacity var(--transition);
 }
 
@@ -175,9 +200,10 @@
 }
 
 .advanced-table td {
-  padding: 12px 14px;
+  padding: 10px 14px;
   border-bottom: 1px solid var(--border-color);
   vertical-align: middle;
+  font-size: 14px;
 }
 
 .advanced-table tbody tr {
@@ -194,28 +220,22 @@
 
 /* ---- Student Avatar ---- */
 .student-avatar {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13px;
   color: #fff;
   flex-shrink: 0;
-}
-
-.student-avatar.small {
-  width: 32px;
-  height: 32px;
-  font-size: 12px;
 }
 
 .student-cell {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .student-cell .student-name {
@@ -267,6 +287,7 @@
   height: 16px;
   cursor: pointer;
   accent-color: var(--accent-color);
+  margin: 0;
 }
 
 /* ---- Actions Column ---- */
@@ -280,6 +301,9 @@
 .actions-cell .btn-sm {
   padding: 4px 8px;
   font-size: 12px;
+  height: 30px;
+  min-width: 30px;
+  justify-content: center;
 }
 
 .actions-cell .btn-sm svg {
@@ -292,7 +316,7 @@
   display: none;
   align-items: center;
   gap: 16px;
-  padding: 12px 16px;
+  padding: 10px 16px;
   background: var(--accent-light);
   border: 1px solid #a7f3d0;
   border-radius: var(--border-radius);
@@ -314,6 +338,23 @@
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  align-items: center;
+}
+
+.bulk-actions-bar .bulk-actions select {
+  padding: 4px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 13px;
+  background: #fff;
+  height: 34px;
+  cursor: pointer;
+}
+
+.bulk-actions-bar .bulk-actions select:focus {
+  border-color: var(--accent-color);
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.12);
 }
 
 /* ---- Pagination ---- */
@@ -322,9 +363,9 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  padding-top: 16px;
+  padding-top: 12px;
   border-top: 1px solid var(--border-color);
-  margin-top: 4px;
+  margin-top: 0;
 }
 
 .pagination-wrap .pagination-info {
@@ -347,6 +388,10 @@
   font-size: 13px;
   transition: all var(--transition);
   min-width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .pagination-wrap .pagination-controls button:hover:not(:disabled) {
@@ -366,14 +411,18 @@
 }
 
 /* ---- Responsive ---- */
-@media (max-width: 992px) {
-  .filter-group select {
-    min-width: 100px;
-    font-size: 12px;
-    padding: 6px 10px;
+@media (max-width: 1024px) {
+  .student-toolbar .toolbar-left {
+    flex-wrap: wrap;
   }
   .student-toolbar .search-wrapper {
+    min-width: 180px;
     max-width: 240px;
+  }
+  .filter-group select {
+    min-width: 90px;
+    font-size: 12px;
+    padding: 4px 8px;
   }
 }
 
@@ -388,6 +437,7 @@
   }
   .student-toolbar .search-wrapper {
     max-width: 100%;
+    min-width: 100%;
   }
   .filter-group {
     flex-wrap: wrap;
@@ -395,6 +445,10 @@
   .filter-group select {
     flex: 1;
     min-width: 80px;
+  }
+  .student-toolbar .toolbar-right {
+    margin-left: 0;
+    justify-content: flex-start;
   }
   .table-stats {
     flex-direction: column;
@@ -412,6 +466,8 @@
   }
   .actions-cell .btn-sm {
     padding: 3px 6px;
+    height: 26px;
+    min-width: 26px;
   }
   .actions-cell .btn-sm svg {
     width: 12px;
@@ -422,13 +478,19 @@
     padding: 8px 10px;
     font-size: 13px;
   }
+  .student-avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 11px;
+  }
 }
 
 @media (max-width: 480px) {
   .filter-group select {
     font-size: 11px;
-    padding: 4px 8px;
+    padding: 4px 6px;
     min-width: 60px;
+    height: 32px;
   }
   .advanced-table th,
   .advanced-table td {
@@ -436,8 +498,8 @@
     font-size: 12px;
   }
   .student-avatar {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     font-size: 10px;
   }
   .student-cell .student-name {
@@ -446,5 +508,22 @@
   .status-badge {
     font-size: 10px;
     padding: 2px 8px;
+  }
+  .student-toolbar .search-wrapper input {
+    height: 34px;
+    font-size: 13px;
+    padding: 6px 10px 6px 32px;
+  }
+  .toolbar-btn {
+    height: 34px;
+    padding: 0 12px;
+    font-size: 12px;
+  }
+  .bulk-actions-bar {
+    padding: 8px 12px;
+  }
+  .bulk-actions-bar .bulk-actions select {
+    height: 30px;
+    font-size: 12px;
   }
 }
