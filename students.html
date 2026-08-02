@@ -6,9 +6,13 @@
   <title>Students · School ERP</title>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/students.css">
+  
+  <!-- ===== FIREBASE SDK (added) ===== -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
 </head>
 <body>
-  <!-- ========== NAVBAR (Consistent across all pages) ========== -->
+  <!-- ========== NAVBAR ========== -->
   <nav class="navbar">
     <div class="container">
       <span class="brand">
@@ -28,10 +32,9 @@
 
   <!-- ========== MAIN CONTENT ========== -->
   <main class="container" style="padding-top: 32px;">
-    <!-- Page Heading (Matches Dashboard & Fees exactly) -->
     <h1 style="margin-bottom: 24px; font-weight: 600;">Student Management</h1>
 
-    <!-- Filter & Search Card -->
+    <!-- Filter & Search -->
     <div class="card" style="display: flex; flex-wrap: wrap; gap: 20px; align-items: end;">
       <div class="form-group" style="flex:2; min-width:180px;">
         <label>Search</label>
@@ -67,7 +70,7 @@
       </div>
     </div>
 
-    <!-- Students Table Card (Button moved inside Card Header for consistency) -->
+    <!-- Students Table -->
     <div class="card">
       <div class="card-header">
         <span>All Students</span>
@@ -95,7 +98,7 @@
           <tbody id="studentsTableBody">
             <tr>
               <td colspan="7" style="text-align:center; color:var(--text-muted); padding: 40px 0;">
-                No students found. Click "Add Student" to get started.
+                Loading students...
               </td>
             </tr>
           </tbody>
@@ -165,11 +168,13 @@
     </div>
   </div>
 
-  <!-- ========== FOOTER (Consistent across all pages) ========== -->
+  <!-- ========== FOOTER ========== -->
   <footer class="footer">
     <div class="container">Yadav Web technologies</div>
   </footer>
 
+  <!-- ===== SCRIPTS (Updated order) ===== -->
+  <script src="js/firebase-config.js"></script>
   <script src="js/script.js"></script>
   <script src="js/students.js"></script>
 </body>
