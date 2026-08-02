@@ -1,0 +1,450 @@
+/* ============================================
+   ADVANCED STUDENT MANAGEMENT STYLES
+   Does NOT modify existing styles.css
+   ============================================ */
+
+/* ---- Toolbar ---- */
+.student-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.student-toolbar .toolbar-left {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  flex: 1;
+}
+
+.student-toolbar .toolbar-right {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.student-toolbar .search-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+  max-width: 320px;
+}
+
+.student-toolbar .search-wrapper svg {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.student-toolbar .search-wrapper input {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  background: #fff;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.student-toolbar .search-wrapper input:focus {
+  border-color: var(--accent-color);
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+}
+
+/* ---- Filter Dropdowns ---- */
+.filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.filter-group select {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 13px;
+  background: #fff;
+  cursor: pointer;
+  min-width: 120px;
+  transition: border-color var(--transition);
+}
+
+.filter-group select:focus {
+  border-color: var(--accent-color);
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+}
+
+.filter-group .filter-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* ---- Table Stats ---- */
+.table-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0 12px 0;
+  font-size: 14px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.table-stats .stats-left {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.table-stats .stats-left strong {
+  color: var(--text-color);
+}
+
+.table-stats .stats-right {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.table-stats .stats-right select {
+  padding: 4px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 13px;
+  background: #fff;
+}
+
+/* ---- Advanced Table ---- */
+.advanced-table-wrap {
+  overflow-x: auto;
+  margin-top: 0;
+}
+
+.advanced-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.advanced-table thead {
+  background: #f1f5f9;
+}
+
+.advanced-table th {
+  padding: 12px 14px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--primary-color);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  border-bottom: 2px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  background: #f1f5f9;
+  z-index: 2;
+}
+
+.advanced-table th .sort-icon {
+  display: inline-block;
+  margin-left: 4px;
+  opacity: 0.4;
+  transition: opacity var(--transition);
+}
+
+.advanced-table th:hover .sort-icon {
+  opacity: 1;
+}
+
+.advanced-table th.sorted .sort-icon {
+  opacity: 1;
+}
+
+.advanced-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+}
+
+.advanced-table tbody tr {
+  transition: background var(--transition);
+}
+
+.advanced-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.advanced-table tbody tr.selected {
+  background: var(--accent-light);
+}
+
+/* ---- Student Avatar ---- */
+.student-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.student-avatar.small {
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
+}
+
+.student-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.student-cell .student-name {
+  font-weight: 500;
+}
+
+/* ---- Status Badges ---- */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+
+.status-badge.active {
+  background: #d1fae5;
+  color: #065f46;
+  border-color: #a7f3d0;
+}
+
+.status-badge.inactive {
+  background: #fee2e2;
+  color: #991b1b;
+  border-color: #fecaca;
+}
+
+.status-badge .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-badge.active .dot {
+  background: #059669;
+}
+
+.status-badge.inactive .dot {
+  background: #dc2626;
+}
+
+/* ---- Checkbox ---- */
+.student-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--accent-color);
+}
+
+/* ---- Actions Column ---- */
+.actions-cell {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.actions-cell .btn-sm {
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.actions-cell .btn-sm svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ---- Bulk Actions Bar ---- */
+.bulk-actions-bar {
+  display: none;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background: var(--accent-light);
+  border: 1px solid #a7f3d0;
+  border-radius: var(--border-radius);
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.bulk-actions-bar.visible {
+  display: flex;
+}
+
+.bulk-actions-bar .bulk-count {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.bulk-actions-bar .bulk-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ---- Pagination ---- */
+.pagination-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+  margin-top: 4px;
+}
+
+.pagination-wrap .pagination-info {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.pagination-wrap .pagination-controls {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.pagination-wrap .pagination-controls button {
+  padding: 6px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all var(--transition);
+  min-width: 36px;
+}
+
+.pagination-wrap .pagination-controls button:hover:not(:disabled) {
+  background: #f1f5f9;
+  border-color: var(--accent-color);
+}
+
+.pagination-wrap .pagination-controls button.active {
+  background: var(--accent-color);
+  color: #fff;
+  border-color: var(--accent-color);
+}
+
+.pagination-wrap .pagination-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 992px) {
+  .filter-group select {
+    min-width: 100px;
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  .student-toolbar .search-wrapper {
+    max-width: 240px;
+  }
+}
+
+@media (max-width: 768px) {
+  .student-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .student-toolbar .toolbar-left {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .student-toolbar .search-wrapper {
+    max-width: 100%;
+  }
+  .filter-group {
+    flex-wrap: wrap;
+  }
+  .filter-group select {
+    flex: 1;
+    min-width: 80px;
+  }
+  .table-stats {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .table-stats .stats-right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .pagination-wrap {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+  .actions-cell .btn-sm {
+    padding: 3px 6px;
+  }
+  .actions-cell .btn-sm svg {
+    width: 12px;
+    height: 12px;
+  }
+  .advanced-table th,
+  .advanced-table td {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-group select {
+    font-size: 11px;
+    padding: 4px 8px;
+    min-width: 60px;
+  }
+  .advanced-table th,
+  .advanced-table td {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+  .student-avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 10px;
+  }
+  .student-cell .student-name {
+    font-size: 12px;
+  }
+  .status-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+  }
+}
