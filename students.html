@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/students.css">
 </head>
 <body>
-  <!-- ========== NAVBAR (Consistent with Dashboard) ========== -->
+  <!-- ========== NAVBAR (Consistent across all pages) ========== -->
   <nav class="navbar">
     <div class="container">
       <span class="brand">
@@ -28,18 +28,10 @@
 
   <!-- ========== MAIN CONTENT ========== -->
   <main class="container" style="padding-top: 32px;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
-      <h1 style="font-weight: 600;">Student Management</h1>
-      <button class="btn btn-primary" onclick="openModal('addStudentModal')">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="12" y1="5" x2="12" y2="19"/>
-          <line x1="5" y1="12" x2="19" y2="12"/>
-        </svg>
-        Add Student
-      </button>
-    </div>
+    <!-- Page Heading (Matches Dashboard & Fees exactly) -->
+    <h1 style="margin-bottom: 24px; font-weight: 600;">Student Management</h1>
 
-    <!-- Filter & Search (Wide) -->
+    <!-- Filter & Search Card -->
     <div class="card" style="display: flex; flex-wrap: wrap; gap: 20px; align-items: end;">
       <div class="form-group" style="flex:2; min-width:180px;">
         <label>Search</label>
@@ -75,8 +67,18 @@
       </div>
     </div>
 
-    <!-- Students Table -->
+    <!-- Students Table Card (Button moved inside Card Header for consistency) -->
     <div class="card">
+      <div class="card-header">
+        <span>All Students</span>
+        <button class="btn btn-primary" onclick="openModal('addStudentModal')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          Add Student
+        </button>
+      </div>
       <div class="table-responsive">
         <table>
           <thead>
@@ -163,7 +165,7 @@
     </div>
   </div>
 
-  <!-- ========== FOOTER (Consistent with Dashboard) ========== -->
+  <!-- ========== FOOTER (Consistent across all pages) ========== -->
   <footer class="footer">
     <div class="container">Yadav Web technologies</div>
   </footer>
