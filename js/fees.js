@@ -1,8 +1,7 @@
 // ============================================
-//  FEES PAGE LOGIC
+//  FEES PAGE LOGIC (Firebase Ready)
 // ============================================
 
-// Populate student dropdown (from DataService)
 function populateStudentSelect() {
   const select = document.getElementById('feeStudentSelect');
   const students = DataService.getStudents();
@@ -19,7 +18,6 @@ function populateStudentSelect() {
   }
 }
 
-// Update summary cards
 function updateSummary() {
   const fees = DataService.getAllFees();
   const totalCollected = fees.filter(f => f.status === 'paid').reduce((sum, f) => sum + f.amount, 0);
@@ -31,7 +29,6 @@ function updateSummary() {
   document.getElementById('studentsWithPending').textContent = studentsWithPending;
 }
 
-// Render fee history (optionally filtered by student) – with alignment classes
 function renderFeeHistory(studentId = '') {
   const tbody = document.getElementById('feeHistoryTable');
   let fees = DataService.getAllFees();
@@ -81,8 +78,7 @@ document.getElementById('feeStudentSelect').addEventListener('change', function(
   renderFeeHistory(studentId);
 });
 
-// Record a payment
-function recordPayment() {
+async function recordPayment() {
   const studentId = document.getElementById('feeStudentSelect').value;
   const amount = parseFloat(document.getElementById('feeAmount').value);
 
@@ -106,19 +102,13 @@ function recordPayment() {
     status: 'paid'
   };
 
-  DataService.addFeeRecord(feeRecord);
+  await DataService.addFeeRecord(feeRecord);
 
-  // Refresh UI
-  updateSummary();
-  renderFeeHistory(studentId);
   document.getElementById('feeAmount').value = '';
-
-  // Show receipt in modal
   showReceipt(feeRecord);
   showToast('Payment recorded successfully!', 'success');
 }
 
-// Show receipt inside modal
 function showReceipt(feeRecord) {
   const student = DataService.getStudentById(feeRecord.studentId);
   if (!student) return;
@@ -153,9 +143,22 @@ function showReceipt(feeRecord) {
   openModal('receiptModal');
 }
 
-// ========== INIT ==========
-document.addEventListener('DOMContentLoaded', function() {
+// Listen for data changes from Firebase
+window.addEventListener('dataChanged', function() {
   populateStudentSelect();
   updateSummary();
-  renderFeeHistory(); // show all fees (empty initially)
+  const selectedStudentId = document.getElementById('feeStudentSelect').value;
+  renderFeeHistory(selectedStudentId);
+  // Also update the selected student info
+  const event = new Event('change');
+  document.getElementById('feeStudentSelect').dispatchEvent(event);
+});
+
+// Initial render
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(() => {
+    populateStudentSelect();
+    updateSummary();
+    renderFeeHistory();
+  }, 200);
 });
