@@ -6,7 +6,6 @@
     <title>Login – Morning Glory English Academy</title>
     <link rel="stylesheet" href="css/style.css" />
     <style>
-        /* Login specific – no CLS, fixed dimensions */
         .login-wrapper {
             display: flex;
             justify-content: center;
@@ -24,7 +23,6 @@
             max-width: 420px;
             width: 100%;
             border: 1px solid var(--gray-200);
-            /* Fixed height to prevent CLS */
             min-height: 480px;
             display: flex;
             flex-direction: column;
@@ -111,7 +109,6 @@
             font-size: 0.8rem;
             color: var(--gray-400);
         }
-        /* Spinner SVG inside button */
         .spinner {
             display: inline-block;
             width: 20px;
@@ -126,7 +123,6 @@
         }
         .hidden { display: none; }
 
-        /* Responsive */
         @media (max-width: 480px) {
             .login-card {
                 padding: 28px 20px;
@@ -140,7 +136,7 @@
 
     <div class="login-wrapper">
         <div class="login-card">
-            <!-- Logo SVG (consistent with ERP) -->
+            <!-- Logo SVG -->
             <svg class="brand-icon" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="2" y="2" width="56" height="56" rx="14" stroke="#4F46E5" stroke-width="4" />
                 <path d="M16 44V16H30C34 16 38 18.5 38 22C38 25.5 34 28 30 28H22M36 44L30 28H22L16 44" stroke="#4F46E5" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -172,13 +168,12 @@
         </div>
     </div>
 
-    <!-- Firebase & RBAC (for login) -->
+    <!-- Firebase Auth (no RBAC) -->
     <script type="importmap">
         {
             "imports": {
                 "firebase/app": "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js",
-                "firebase/auth": "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js",
-                "firebase/database": "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"
+                "firebase/auth": "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"
             }
         }
     </script>
@@ -197,30 +192,19 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             errorDiv.textContent = '';
-            // Disable button and show spinner
             loginBtn.disabled = true;
             btnText.textContent = 'Signing in...';
             btnSpinner.classList.remove('hidden');
 
             try {
                 await signInWithEmailAndPassword(auth, email.value.trim(), password.value);
-                // Redirect will happen after auth state changes in rbac
-                // but we can also redirect immediately after success
                 window.location.href = 'index.html';
             } catch (err) {
                 errorDiv.textContent = err.message || 'Login failed. Please check your credentials.';
-                // Re-enable button
                 loginBtn.disabled = false;
                 btnText.textContent = 'Sign In';
                 btnSpinner.classList.add('hidden');
             }
-        });
-
-        // Reset button state if user navigates back (optional)
-        window.addEventListener('pageshow', () => {
-            loginBtn.disabled = false;
-            btnText.textContent = 'Sign In';
-            btnSpinner.classList.add('hidden');
         });
     </script>
 </body>
