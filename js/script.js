@@ -1,12 +1,6 @@
-// ============================================
-// js/script.js – GLOBAL BEHAVIOUR
-// Morning Glory English Academy ERP
-// No demo data – ready for Firebase
-// ============================================
-
+// js/script.js – Global utilities (hamburger, etc.)
 document.addEventListener('DOMContentLoaded', function() {
 
-    // ---------- Sidebar Toggle ----------
     const sidebar = document.getElementById('sidebar');
     const hamburger = document.getElementById('hamburgerBtn');
     const overlay = document.querySelector('.sidebar-overlay');
@@ -32,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // ---------- Currency Formatter (Indian Rupee) ----------
+    // Currency formatter (INR)
     window.formatINR = function(amount) {
         if (amount === undefined || amount === null) return '₹ 0';
         return new Intl.NumberFormat('en-IN', {
@@ -42,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }).format(amount);
     };
 
-    // ---------- Date Formatter (DD/MM/YYYY) ----------
+    // Date formatter (DD/MM/YYYY)
     window.formatDate = function(dateString) {
         if (!dateString) return '--/--/----';
         const d = new Date(dateString);
@@ -53,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return `${day}/${month}/${year}`;
     };
 
-    // ---------- Set Active Nav Link ----------
+    // Active nav link (no permission checks)
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('.nav-link').forEach(link => {
         const href = link.getAttribute('href');
@@ -64,5 +58,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    console.log('Morning Glory ERP · Global script loaded (clean architecture)');
+    console.log('Morning Glory ERP · Global script loaded');
 });
