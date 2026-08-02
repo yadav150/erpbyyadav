@@ -1,213 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard · School ERP</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <!-- ===== NEW DASHBOARD CSS ===== -->
-  <link rel="stylesheet" href="css/dashboard-analytics.css">
-  <link rel="stylesheet" href="css/search.css">
-  
-  <!-- ===== FIREBASE SDK ===== -->
-  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
-  
-  <!-- ===== CHART.JS FOR ANALYTICS ===== -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard – Morning Glory English Academy</title>
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <!-- ========== NAVBAR ========== -->
-  <nav class="navbar">
-    <div class="container" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
-      <span class="brand">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 6V4M8 6V4M16 6V4M4 6h16v14H4z"/>
-          <path d="M8 10h8M8 14h6"/>
-        </svg>
-        School ERP
-      </span>
-      <div style="display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
-        <div class="nav-links">
-  <a href="index.html">Dashboard</a>
-  <a href="students.html">Students</a>
-  <a href="fees.html">Fees</a>
-  <a href="receipts.html">Receipts</a>
-  <a href="receipt-settings.html">Settings</a>
-</div>
-        <div class="search-container">
-          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"/>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-          </svg>
-          <input type="text" id="globalSearchInput" placeholder="Search students...">
-          <div class="search-results" id="globalSearchResults"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <!-- SVG Logo -->
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="32" height="32" rx="8" stroke="#4F46E5" stroke-width="3" />
+                <path d="M10 26V10H18C20.5 10 22.5 11.5 22.5 14C22.5 16.5 20.5 18 18 18H14M22 26L18 18H14L10 26" stroke="#4F46E5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M26 18V26M26 18H22M26 18H30" stroke="#4F46E5" stroke-width="2.5" stroke-linecap="round" />
+            </svg>
+            <span class="brand-text">Morning Glory</span>
         </div>
-      </div>
+
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-link active">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 10L10 2L18 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 8V16H16V8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="7" y="12" width="6" height="4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="students.html" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M3 17C3 14.2386 5.23858 12 8 12H12C14.7614 12 17 14.2386 17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <span>Students</span>
+            </a>
+            <a href="teachers.html" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="6" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M3 16C3 13.2386 5.23858 11 8 11H12C14.7614 11 17 13.2386 17 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="8" y="14" width="4" height="4" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                <span>Teachers</span>
+            </a>
+            <a href="fees.html" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <span>Fees</span>
+            </a>
+            <a href="salary.html" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="5" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M7 9H13M7 13H11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <span>Salary</span>
+            </a>
+            <a href="reports.html" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="12" width="4" height="6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="8" y="8" width="4" height="10" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><rect x="14" y="4" width="4" height="14" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                <span>Reports</span>
+            </a>
+            <a href="settings.html" class="nav-link">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M10 2V4M10 16V18M4 10H2M18 10H16M5.5 5.5L4 4M15.5 15.5L17 17M5.5 14.5L4 16M15.5 4.5L17 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <span>Settings</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <span class="version">v2.0</span>
+            <span class="school-name">Morning Glory English Academy</span>
+        </div>
+    </aside>
+
+    <!-- MAIN WRAPPER -->
+    <div class="main-wrapper" id="mainWrapper">
+
+        <!-- TOP HEADER -->
+        <header class="top-header">
+            <div class="header-left">
+                <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6H21M3 12H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </button>
+                <h1 class="page-title">Dashboard</h1>
+            </div>
+            <div class="header-right">
+                <span class="greeting">Welcome, Admin</span>
+                <div class="avatar">
+                    <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="#E5E7EB" stroke-width="2"/><circle cx="18" cy="13" r="5" stroke="#E5E7EB" stroke-width="2"/><path d="M6 29C6 24.0294 10.0294 20 15 20H21C25.9706 20 30 24.0294 30 29" stroke="#E5E7EB" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+            </div>
+        </header>
+
+        <!-- PAGE CONTENT -->
+        <main class="page-content">
+
+            <!-- Stats Cards (empty values) -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="5" stroke="currentColor" stroke-width="2"/><path d="M4 24C4 19.5817 7.58172 16 12 16H16C20.4183 16 24 19.5817 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total Students</span>
+                        <span class="stat-value" id="totalStudents">0</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="9" r="5" stroke="currentColor" stroke-width="2"/><path d="M4 23C4 18.5817 7.58172 15 12 15H16C20.4183 15 24 18.5817 24 23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="11" y="18" width="6" height="6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total Teachers</span>
+                        <span class="stat-value" id="totalTeachers">0</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="currentColor" stroke-width="2"/><path d="M9 14H19M14 9V19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Fees Collected (₹)</span>
+                        <span class="stat-value" id="feesCollected">0</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="7" width="20" height="16" rx="3" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 12H19M9 17H15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Salary Paid (₹)</span>
+                        <span class="stat-value" id="salaryPaid">0</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Grid -->
+            <section class="dashboard-grid">
+                <!-- Recent Activities -->
+                <div class="card recent-activities">
+                    <div class="card-header">
+                        <h2>Recent Activities</h2>
+                        <button class="btn-sm btn-outline">View All</button>
+                    </div>
+                    <ul class="activity-list" id="activityList">
+                        <li class="text-muted" style="padding:12px 0; color:var(--gray-400);">No recent activities to display.</li>
+                    </ul>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="card quick-actions">
+                    <div class="card-header">
+                        <h2>Quick Actions</h2>
+                    </div>
+                    <div class="quick-grid">
+                        <a href="students.html" class="quick-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 8V16M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                            <span>Add Student</span>
+                        </a>
+                        <a href="teachers.html" class="quick-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 8V16M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                            <span>Add Teacher</span>
+                        </a>
+                        <a href="fees.html" class="quick-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M8 12H16M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                            <span>Collect Fees</span>
+                        </a>
+                        <a href="salary.html" class="quick-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="6" width="16" height="13" rx="2" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 10H16M8 14H12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                            <span>Pay Salary</span>
+                        </a>
+                        <a href="reports.html" class="quick-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="14" width="4" height="7" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><rect x="10" y="9" width="4" height="12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><rect x="17" y="4" width="4" height="17" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+                            <span>View Reports</span>
+                        </a>
+                        <a href="settings.html" class="quick-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M12 3V5M12 19V21M5 12H3M21 12H19M6.5 6.5L5 5M18.5 18.5L20 20M6.5 17.5L5 19M18.5 5.5L20 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                            <span>Settings</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Fee Status Summary (empty table) -->
+            <section class="card fee-summary">
+                <div class="card-header">
+                    <h2>Fee Status Summary</h2>
+                    <div class="filter-group">
+                        <select class="form-select" id="feeFilter">
+                            <option value="all">All Classes</option>
+                            <option value="1">Class 1</option>
+                            <option value="2">Class 2</option>
+                            <option value="3">Class 3</option>
+                            <option value="4">Class 4</option>
+                            <option value="5">Class 5</option>
+                            <option value="6">Class 6</option>
+                            <option value="7">Class 7</option>
+                            <option value="8">Class 8</option>
+                            <option value="9">Class 9</option>
+                            <option value="10">Class 10</option>
+                            <option value="11">Class 11</option>
+                            <option value="12">Class 12</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table" id="feeSummaryTable">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Class</th>
+                                <th>Amount (₹)</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="feeSummaryBody">
+                            <!-- Empty – populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="site-footer">
+            <div class="footer-content">
+                <span>&copy; 2026 <strong>Morning Glory English Academy</strong></span>
+                <span>Developed by <strong>Yadab Web Technologies</strong></span>
+            </div>
+        </footer>
     </div>
-  </nav>
 
-  <!-- ========== MAIN CONTENT ========== -->
-  <main class="container" style="padding-top: 32px;">
-    <h1 style="margin-bottom: 24px; font-weight: 600;">Dashboard Analytics</h1>
+    <!-- Overlay for mobile -->
+    <div class="sidebar-overlay"></div>
 
-    <!-- ===== SUMMARY CARDS (6 cards) ===== -->
-    <div class="analytics-grid">
-      <!-- Card 1: Total Students -->
-      <div class="analytics-card">
-        <div class="card-top">
-          <div>
-            <div class="card-number" id="totalStudents">0</div>
-            <div class="card-label">Total Students</div>
-          </div>
-          <div class="card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 2: Today's Collection -->
-      <div class="analytics-card">
-        <div class="card-top">
-          <div>
-            <div class="card-number" id="todayCollection">₹0</div>
-            <div class="card-label">Today's Collection</div>
-          </div>
-          <div class="card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-              <line x1="16" y1="2" x2="16" y2="6"/>
-              <line x1="8" y1="2" x2="8" y2="6"/>
-              <line x1="3" y1="10" x2="21" y2="10"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 3: Total Collection -->
-      <div class="analytics-card">
-        <div class="card-top">
-          <div>
-            <div class="card-number" id="totalFeesCollected">₹0</div>
-            <div class="card-label">Total Collection</div>
-          </div>
-          <div class="card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M12 6v6l4 2"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 4: Pending Fees -->
-      <div class="analytics-card">
-        <div class="card-top">
-          <div>
-            <div class="card-number" id="pendingFees">₹0</div>
-            <div class="card-label">Pending Fees</div>
-          </div>
-          <div class="card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 5: Students with Due Fees -->
-      <div class="analytics-card">
-        <div class="card-top">
-          <div>
-            <div class="card-number" id="studentsWithDue">0</div>
-            <div class="card-label">Students with Due</div>
-          </div>
-          <div class="card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              <path d="M12 8v4"/>
-              <path d="M12 16h.01"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 6: Recent Admissions -->
-      <div class="analytics-card">
-        <div class="card-top">
-          <div>
-            <div class="card-number" id="recentAdmissions">0</div>
-            <div class="card-label">Recent Admissions (7 days)</div>
-          </div>
-          <div class="card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-              <path d="M12 3v8M9 8l3 3 3-3"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== CHARTS (3 charts) ===== -->
-    <div class="charts-grid">
-      <!-- Chart 1: Monthly Fee Collection -->
-      <div class="chart-card">
-        <div class="chart-header">
-          <span class="chart-title">Monthly Fee Collection</span>
-        </div>
-        <div class="chart-container">
-          <canvas id="monthlyChart"></canvas>
-        </div>
-      </div>
-
-      <!-- Chart 2: Student Distribution by Class -->
-      <div class="chart-card">
-        <div class="chart-header">
-          <span class="chart-title">Students by Class</span>
-        </div>
-        <div class="chart-container pie-chart">
-          <canvas id="classDistributionChart"></canvas>
-        </div>
-      </div>
-
-      <!-- Chart 3: Paid vs Pending Fees -->
-      <div class="chart-card">
-        <div class="chart-header">
-          <span class="chart-title">Fee Status</span>
-        </div>
-        <div class="chart-container pie-chart">
-          <canvas id="feeStatusChart"></canvas>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== RECENT ACTIVITY ===== -->
-    <div class="activity-card">
-      <div class="activity-header">
-        <span class="activity-title">Recent Activity</span>
-        <span style="font-size:12px; color:var(--text-muted);">Live updates</span>
-      </div>
-      <div class="activity-list" id="activityList">
-        <div class="activity-empty">Loading activity...</div>
-      </div>
-    </div>
-  </main>
-
-  <!-- ========== FOOTER ========== -->
-  <footer class="footer">
-    <div class="container">Yadav Web technologies</div>
-  </footer>
-
-  <!-- ===== SCRIPTS (UPDATED ORDER) ===== -->
-  <script src="js/firebase-config.js"></script>
-  <script src="js/script.js"></script>
-  <script src="js/search.js"></script>
-  <!-- ===== NEW DASHBOARD ANALYTICS SCRIPT ===== -->
-  <script src="js/dashboard-analytics.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
