@@ -2,22 +2,24 @@
 //  FEES PAGE LOGIC
 // ============================================
 
-const allStudents = DataService.getStudents();
-let allFees = DataService.getAllFees();
-
-// Populate student dropdown
+// Populate student dropdown (from DataService)
 function populateStudentSelect() {
   const select = document.getElementById('feeStudentSelect');
+  const students = DataService.getStudents();
   select.innerHTML = '<option value="">— Select —</option>';
-  allStudents.forEach(s => {
-    const opt = document.createElement('option');
-    opt.value = s.id;
-    opt.textContent = `${s.name} (${s.class}-${s.section})`;
-    select.appendChild(opt);
-  });
+  if (students.length === 0) {
+    select.innerHTML += '<option value="" disabled>No students available</option>';
+  } else {
+    students.forEach(s => {
+      const opt = document.createElement('option');
+      opt.value = s.id;
+      opt.textContent = `${s.name} (${s.class}-${s.section})`;
+      select.appendChild(opt);
+    });
+  }
 }
 
-// Update summary stats
+// Update summary cards
 function updateSummary() {
   const fees = DataService.getAllFees();
   const totalCollected = fees.filter(f => f.status === 'paid').reduce((sum, f) => sum + f.amount, 0);
@@ -29,25 +31,35 @@ function updateSummary() {
   document.getElementById('studentsWithPending').textContent = studentsWithPending;
 }
 
-// Show fee history (all fees or filtered by selected student)
+// Render fee history (optionally filtered by student) – with alignment classes
 function renderFeeHistory(studentId = '') {
   const tbody = document.getElementById('feeHistoryTable');
   let fees = DataService.getAllFees();
   if (studentId) fees = fees.filter(f => f.studentId === studentId);
+
   if (fees.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--text-muted);">No fee records</td></tr>`;
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="5" style="text-align:center; color:var(--text-muted); padding: 40px 0;">
+          No fee records found.
+        </td>
+      </tr>
+    `;
     return;
   }
+
   tbody.innerHTML = fees.map(f => {
     const student = DataService.getStudentById(f.studentId);
     const statusBadge = f.status === 'paid' ? 'badge-paid' : 'badge-pending';
-    return `<tr>
-      <td>${student ? student.name : 'Unknown'}</td>
-      <td>${formatCurrency(f.amount)}</td>
-      <td>${f.paidDate || '—'}</td>
-      <td>${f.receiptNo || '—'}</td>
-      <td><span class="badge ${statusBadge}">${f.status}</span></td>
-    </tr>`;
+    return `
+      <tr>
+        <td class="nowrap">${student ? student.name : 'Unknown'}</td>
+        <td class="amount">${formatCurrency(f.amount)}</td>
+        <td class="nowrap">${f.paidDate || '—'}</td>
+        <td class="nowrap">${f.receiptNo || '—'}</td>
+        <td class="nowrap"><span class="badge ${statusBadge}">${f.status}</span></td>
+      </tr>
+    `;
   }).join('');
 }
 
@@ -55,6 +67,7 @@ function renderFeeHistory(studentId = '') {
 document.getElementById('feeStudentSelect').addEventListener('change', function() {
   const studentId = this.value;
   const info = document.getElementById('selectedStudentInfo');
+
   if (studentId) {
     const student = DataService.getStudentById(studentId);
     const fees = DataService.getFeesForStudent(studentId);
@@ -64,15 +77,23 @@ document.getElementById('feeStudentSelect').addEventListener('change', function(
   } else {
     info.textContent = '';
   }
+
   renderFeeHistory(studentId);
 });
 
-// Record payment
+// Record a payment
 function recordPayment() {
   const studentId = document.getElementById('feeStudentSelect').value;
   const amount = parseFloat(document.getElementById('feeAmount').value);
-  if (!studentId) { alert('Select a student'); return; }
-  if (!amount || amount <= 0) { alert('Enter a valid amount'); return; }
+
+  if (!studentId) {
+    alert('Please select a student.');
+    return;
+  }
+  if (!amount || amount <= 0) {
+    alert('Please enter a valid amount.');
+    return;
+  }
 
   const receiptNo = generateReceiptNumber();
   const paidDate = getTodayDate();
@@ -86,20 +107,18 @@ function recordPayment() {
   };
 
   DataService.addFeeRecord(feeRecord);
-  allFees = DataService.getAllFees();
 
-  // Update UI
+  // Refresh UI
   updateSummary();
   renderFeeHistory(studentId);
   document.getElementById('feeAmount').value = '';
 
-  // Show receipt
+  // Show receipt in modal
   showReceipt(feeRecord);
-
-  showToast('Payment recorded!', 'success');
+  showToast('Payment recorded successfully!', 'success');
 }
 
-// Show receipt modal with content
+// Show receipt inside modal
 function showReceipt(feeRecord) {
   const student = DataService.getStudentById(feeRecord.studentId);
   if (!student) return;
@@ -109,13 +128,13 @@ function showReceipt(feeRecord) {
     <div class="receipt-container" id="receiptPrintArea">
       <div class="header">
         <h2>Yadav School ERP</h2>
-        <p>Payment Receipt</p>
+        <p style="color: var(--text-muted);">Payment Receipt</p>
       </div>
       <div class="details">
         <div><strong>Receipt No:</strong> ${feeRecord.receiptNo}</div>
         <div><strong>Date:</strong> ${feeRecord.paidDate}</div>
       </div>
-      <div style="margin-bottom: 16px;">
+      <div style="margin-bottom: 20px;">
         <p><strong>Student:</strong> ${student.name} (${student.class}-${student.section})</p>
         <p><strong>Email:</strong> ${student.email}</p>
       </div>
@@ -134,9 +153,9 @@ function showReceipt(feeRecord) {
   openModal('receiptModal');
 }
 
-// Initial load
+// ========== INIT ==========
 document.addEventListener('DOMContentLoaded', function() {
   populateStudentSelect();
   updateSummary();
-  renderFeeHistory(); // show all
+  renderFeeHistory(); // show all fees (empty initially)
 });
